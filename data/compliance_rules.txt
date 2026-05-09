@@ -1,0 +1,256 @@
+STARBUCKS AI OPERATIONS COMPLIANCE FRAMEWORK
+Version 1.4 | Effective Date: January 1, 2024
+Classification: RESTRICTED — Management and Compliance Team Only
+
+================================================================================
+SECTION 1: TRANSACTION LOGGING REQUIREMENTS
+================================================================================
+
+All financial transactions and AI-assisted decisions must be fully logged to
+ensure auditability, fraud prevention, and regulatory compliance.
+
+1.1 MANDATORY REFUND LOGGING
+    Every refund transaction, regardless of amount, must be recorded in the
+    Starbucks Transaction Management System (TMS) with the following fields:
+
+    Required Fields:
+    - transaction_id: Unique system-generated identifier
+    - order_id: Original order reference number
+    - customer_id: Loyalty ID or anonymized identifier (no raw PII in logs)
+    - refund_amount: Amount refunded in USD
+    - refund_reason_code: Standardized code from approved reason list
+    - approval_level: SUPERVISOR / MANAGER / DISTRICT_MANAGER
+    - approved_by: Employee ID of approving party
+    - ai_recommendation: Flag indicating if AI system made a recommendation
+    - hitl_required: Boolean — whether human-in-the-loop was triggered
+    - hitl_decision: APPROVED / DENIED / MODIFIED (if HITL was triggered)
+    - processed_timestamp: ISO 8601 datetime of processing
+    - store_id: Store identifier
+
+    Retention: All refund logs must be retained for a minimum of 7 years
+    in compliance with financial record-keeping regulations.
+
+1.2 REAL-TIME LOGGING
+    Logs must be written to the TMS in real time at the moment of transaction
+    processing. Batch logging is not permitted for refund events. Any logging
+    failure must trigger an alert to the Store Manager immediately.
+
+1.3 LOG INTEGRITY
+    Transaction logs are immutable once written. Amendments must be filed as
+    a separate correction record referencing the original transaction_id.
+    Deletion of log records is strictly prohibited.
+
+================================================================================
+SECTION 2: DATA PRIVACY RULES
+================================================================================
+
+Starbucks is committed to protecting customer and employee data in accordance
+with applicable privacy laws (CCPA, GDPR where applicable, and Starbucks
+Global Privacy Policy).
+
+2.1 NO PII IN CHAT LOGS OR AI INTERACTION RECORDS
+    AI assistant interactions, chatbot transcripts, and system-generated
+    conversation logs must NOT contain personally identifiable information (PII).
+
+    Prohibited PII in logs:
+    - Full customer name (use anonymized ID or first name + last initial only)
+    - Email address, phone number, home address
+    - Full credit card number, CVV, or expiration date
+    - Date of birth
+    - Government-issued ID numbers
+    - Full loyalty account number (use masked format: SBX-XXXX-XXXX)
+
+    Permitted in logs:
+    - Anonymized customer ID (system-generated)
+    - Order ID
+    - Store ID
+    - Timestamp
+    - Transaction amount
+    - Reason codes (standardized, non-descriptive)
+
+2.2 DATA MINIMIZATION
+    AI systems should collect and process only the minimum data necessary to
+    complete the task. AI agents must not request or store customer data
+    beyond what is required for the current interaction.
+
+2.3 DATA RETENTION FOR AI LOGS
+    AI interaction logs are retained for 90 days for quality assurance and
+    model evaluation. After 90 days, logs are anonymized and retained for
+    an additional 12 months for compliance auditing. Raw interaction data
+    is purged after 90 days.
+
+2.4 CUSTOMER DATA ACCESS REQUESTS
+    If a customer requests access to or deletion of their data, the request
+    must be routed to privacy@starbucks.internal within 24 hours. AI systems
+    may not independently fulfill data access or deletion requests.
+
+2.5 THIRD-PARTY DATA SHARING
+    AI-processed customer data must not be shared with third-party vendors
+    without explicit data processing agreements in place. District Manager
+    approval required for any data export request.
+
+================================================================================
+SECTION 3: AI GOVERNANCE RULES
+================================================================================
+
+Starbucks uses AI-assisted tools to support store operations. The following
+rules govern the acceptable use of AI in operational decisions.
+
+3.1 AI IS ADVISORY ONLY
+    All AI recommendations are advisory in nature. AI systems do not have
+    authority to make final decisions on:
+    - Refund approvals (any amount)
+    - Staff disciplinary actions
+    - Menu pricing or promotional decisions
+    - Inventory emergency orders above standard thresholds
+    - Customer escalations involving legal or safety concerns
+
+    In all cases, a human operator (Shift Supervisor, Store Manager, or
+    District Manager) must review and confirm the AI recommendation before
+    any action is taken.
+
+3.2 HUMAN-IN-THE-LOOP (HITL) — REQUIRED ABOVE $50
+    Any AI-assisted refund recommendation involving an amount of $50.00 or
+    greater must be explicitly reviewed and approved by a human operator
+    before the refund is processed.
+
+    HITL Process:
+    a) AI system generates recommendation with justification
+    b) System flags transaction for human review (HITL trigger)
+    c) Store Manager or District Manager receives notification
+    d) Human reviews: transaction history, refund policy, AI reasoning
+    e) Human selects: APPROVE / DENY / MODIFY
+    f) Decision and rationale logged in TMS
+    g) Action executed only after human confirmation
+
+    AI systems must surface the following to the human reviewer:
+    - Order details and history
+    - Refund eligibility assessment
+    - Policy section applicable
+    - Recommended action with confidence score
+    - Flag if customer has prior refund history (frequency check)
+
+3.3 AI CONFIDENCE THRESHOLDS
+    AI systems must report a confidence score with every recommendation:
+    - HIGH (>85%): AI recommendation displayed; human may accept or override
+    - MEDIUM (60–85%): AI recommendation displayed with caution flag
+    - LOW (<60%): AI surfaces options only; human must make independent decision
+
+3.4 AI SYSTEM FAILURE PROTOCOL
+    If the AI system is unavailable or produces an error:
+    - Fall back to manual decision-making using printed policy guides
+    - Do not delay customer resolution due to AI system unavailability
+    - Log the AI system failure in the Operations Log with timestamp
+    - Notify IT Support: itsupport@starbucks.internal within 1 hour
+
+3.5 PROHIBITED AI USES
+    AI tools must not be used for:
+    - Facial recognition or biometric identification of customers or staff
+    - Automated profiling of customers based on purchase history for
+      differential service treatment
+    - Autonomous communication with customers via email, SMS, or social media
+    - Any decision that involves employment termination or formal discipline
+
+================================================================================
+SECTION 4: ACCESS CONTROL LEVELS
+================================================================================
+
+Access to operational systems, AI tools, and customer data is governed by
+role-based access control (RBAC). Access is granted on a least-privilege basis.
+
+4.1 STORE MANAGER
+    Authorized Systems: POS, TMS (read/write), Inventory Management,
+    Workforce Scheduling, Refund Portal (up to $100), AI Assistant (full access)
+    Data Access: Store-level transaction data, staff schedules, inventory
+    Restrictions: Cannot access data from other stores; cannot approve
+    refunds above $100 without District Manager confirmation
+    AI Permissions: Can approve AI refund recommendations up to $100
+
+4.2 DISTRICT MANAGER
+    Authorized Systems: All store-level systems (read/write) within district,
+    Regional Reporting Dashboard, Refund Portal (unlimited), AI System Audit Logs
+    Data Access: All stores in assigned district, aggregated performance metrics,
+    AI recommendation history and HITL decision logs
+    Restrictions: Cannot access data outside assigned district without
+    Regional Manager authorization
+    AI Permissions: Can approve all AI recommendations; can override AI
+    confidence flags; authorized to request AI model evaluation reports
+
+4.3 REGIONAL MANAGER / OPERATIONS
+    Authorized Systems: All district-level systems (read-only), Regional
+    Compliance Dashboard, Audit Trail system (full access)
+    Data Access: All stores in region; cross-district comparison data;
+    full AI system logs including model performance metrics
+    Restrictions: Production system write access requires IT change management
+    AI Permissions: Can initiate AI model review; can suspend AI features
+    in specific stores or districts pending compliance review
+
+4.4 SHIFT SUPERVISOR
+    Authorized Systems: POS (limited), Refund Portal (up to $50), Inventory
+    spot-check tool, AI Assistant (read-only recommendations)
+    Data Access: Current shift transactions only
+    Restrictions: No access to historical customer data beyond current shift;
+    cannot approve HITL transactions
+    AI Permissions: Can view AI recommendations; cannot approve HITL triggers
+
+4.5 BARISTA / CASHIER
+    Authorized Systems: POS (transaction entry only)
+    Data Access: Current customer order in progress only
+    Restrictions: No access to refund portal, inventory management, or
+    AI systems
+    AI Permissions: None
+
+================================================================================
+SECTION 5: AUDIT EVENTS TO TRACK
+================================================================================
+
+The following events must be captured in the centralized Audit Event Log
+in real time. All events include: event_type, actor_id, store_id,
+timestamp, and relevant entity IDs.
+
+5.1 FINANCIAL AUDIT EVENTS
+    - REFUND_INITIATED: Any refund request entered into system
+    - REFUND_APPROVED: Final approval of refund transaction
+    - REFUND_DENIED: Refund request rejected with reason code
+    - REFUND_MODIFIED: Approved amount differs from requested amount
+    - LARGE_REFUND_FLAGGED: Any refund >= $50 flagged for HITL
+    - DUPLICATE_CHARGE_DETECTED: System or manual detection of double charge
+    - CASH_VARIANCE_REPORTED: End-of-day cash count differs from POS total
+
+5.2 AI SYSTEM AUDIT EVENTS
+    - AI_RECOMMENDATION_GENERATED: AI produces a decision recommendation
+    - HITL_TRIGGERED: Human review required (threshold exceeded)
+    - HITL_APPROVED: Human approves AI recommendation
+    - HITL_DENIED: Human rejects AI recommendation
+    - HITL_MODIFIED: Human modifies AI recommendation before approving
+    - AI_OVERRIDE: Human overrides AI recommendation with different decision
+    - AI_SYSTEM_ERROR: AI system fails to produce recommendation
+    - AI_LOW_CONFIDENCE: AI confidence score falls below 60%
+
+5.3 ACCESS CONTROL AUDIT EVENTS
+    - USER_LOGIN: Successful authentication to any operational system
+    - USER_LOGIN_FAILED: Failed authentication attempt (alert after 3 failures)
+    - PRIVILEGE_ESCALATION: User accesses system above their role level
+    - DATA_EXPORT: Any export of customer or transaction data
+    - ACCESS_DENIED: User attempts to access restricted resource
+    - ROLE_CHANGE: User's access level is modified
+
+5.4 OPERATIONAL AUDIT EVENTS
+    - INVENTORY_CRITICAL_ALERT: Item reaches CRITICAL status
+    - INVENTORY_EMERGENCY_ORDER: Emergency supply order placed
+    - ESCALATION_TIER3_OPENED: Tier 3 customer escalation initiated
+    - INCIDENT_REPORT_FILED: Formal incident report submitted
+    - POLICY_EXCEPTION_GRANTED: Manager grants exception to standard policy
+
+5.5 AUDIT LOG REQUIREMENTS
+    - Logs must be tamper-evident (cryptographic hash chain preferred)
+    - Retention: 7 years minimum for financial events; 2 years for system events
+    - Access to audit logs restricted to District Manager and above
+    - Automated anomaly detection must run daily on audit log patterns
+    - Monthly audit summary report submitted to Regional Compliance Officer
+
+================================================================================
+Questions: compliance@starbucks.internal | Legal: legal@starbucks.internal
+Reviewed By: Starbucks Global Compliance & AI Ethics Team
+Next Review Date: July 1, 2024
+================================================================================

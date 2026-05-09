@@ -1,0 +1,8 @@
+.env
+__pycache__/
+*.pyc
+.DS_Store
+vectorstore/
+*.faiss
+*.pkl
+node_modules/

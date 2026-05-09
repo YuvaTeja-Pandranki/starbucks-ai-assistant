@@ -1,0 +1,54 @@
+{
+  "store_id": "STR-101",
+  "last_updated": "2024-01-15T06:00:00",
+  "inventory": [
+    {
+      "item_id": "INV-001",
+      "name": "Whole Milk",
+      "unit": "gallons",
+      "current_stock": 12,
+      "reorder_threshold": 20,
+      "max_capacity": 60,
+      "status": "LOW",
+      "supplier": "Dairy Fresh Co.",
+      "last_restocked": "2024-01-13T07:00:00",
+      "notes": "Stock falling below threshold — order within 24 hours"
+    },
+    {
+      "item_id": "INV-002",
+      "name": "Espresso Beans",
+      "unit": "lbs",
+      "current_stock": 45,
+      "reorder_threshold": 30,
+      "max_capacity": 100,
+      "status": "OK",
+      "supplier": "Starbucks Central Roastery",
+      "last_restocked": "2024-01-14T08:00:00",
+      "notes": ""
+    },
+    {
+      "item_id": "INV-003",
+      "name": "Vanilla Syrup",
+      "unit": "bottles (1L)",
+      "current_stock": 3,
+      "reorder_threshold": 10,
+      "max_capacity": 30,
+      "status": "CRITICAL",
+      "supplier": "Starbucks Beverage Supplies",
+      "last_restocked": "2024-01-10T09:00:00",
+      "notes": "CRITICAL — initiate same-day emergency order immediately"
+    },
+    {
+      "item_id": "INV-004",
+      "name": "Paper Cups Large",
+      "unit": "units",
+      "current_stock": 200,
+      "reorder_threshold": 100,
+      "max_capacity": 500,
+      "status": "OK",
+      "supplier": "Starbucks Packaging Supplies",
+      "last_restocked": "2024-01-12T10:00:00",
+      "notes": ""
+    }
+  ]
+}

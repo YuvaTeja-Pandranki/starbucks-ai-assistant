@@ -1,0 +1,84 @@
+{
+  "orders": [
+    {
+      "order_id": "ORD-001",
+      "customer": {
+        "name": "Alice Johnson",
+        "email": "alice.johnson@email.com",
+        "loyalty_id": "SBX-441892"
+      },
+      "store_id": "STR-101",
+      "items": [
+        {"name": "Venti Latte", "price": 7.50, "quantity": 1},
+        {"name": "Chocolate Croissant", "price": 5.00, "quantity": 1}
+      ],
+      "total_amount": 12.50,
+      "payment_method": "credit_card",
+      "status": "delivered",
+      "refund_requested": true,
+      "refund_reason": "Wrong order received",
+      "order_date": "2024-01-15T09:30:00",
+      "notes": "Customer received a Venti Mocha instead of Venti Latte"
+    },
+    {
+      "order_id": "ORD-002",
+      "customer": {
+        "name": "Bob Smith",
+        "email": "bob.smith@email.com",
+        "loyalty_id": "SBX-228374"
+      },
+      "store_id": "STR-101",
+      "items": [
+        {"name": "Grande Cappuccino", "price": 6.25, "quantity": 1}
+      ],
+      "total_amount": 6.25,
+      "payment_method": "mobile_pay",
+      "status": "delivered",
+      "refund_requested": true,
+      "refund_reason": "Quality issue - drink was cold",
+      "order_date": "2024-01-15T10:15:00",
+      "notes": "Customer reported drink was served at room temperature, not hot"
+    },
+    {
+      "order_id": "ORD-003",
+      "customer": {
+        "name": "Carol Davis",
+        "email": "carol.davis@email.com",
+        "loyalty_id": "SBX-990123"
+      },
+      "store_id": "STR-101",
+      "items": [
+        {"name": "Venti Frappuccino", "price": 8.50, "quantity": 3},
+        {"name": "Cake Pop", "price": 3.50, "quantity": 4},
+        {"name": "Blueberry Muffin", "price": 4.25, "quantity": 3},
+        {"name": "Turkey & Swiss Sandwich", "price": 9.25, "quantity": 3}
+      ],
+      "total_amount": 87.00,
+      "payment_method": "credit_card",
+      "status": "delivered",
+      "refund_requested": true,
+      "refund_reason": "Changed mind",
+      "order_date": "2024-01-10T14:00:00",
+      "notes": "Large catering order - customer claims they placed order by mistake"
+    },
+    {
+      "order_id": "ORD-004",
+      "customer": {
+        "name": "David Lee",
+        "email": "david.lee@email.com",
+        "loyalty_id": "SBX-667541"
+      },
+      "store_id": "STR-102",
+      "items": [
+        {"name": "Grande Americano", "price": 4.50, "quantity": 1}
+      ],
+      "total_amount": 4.50,
+      "payment_method": "gift_card",
+      "status": "delivered",
+      "refund_requested": false,
+      "refund_reason": null,
+      "order_date": "2024-01-14T08:00:00",
+      "notes": ""
+    }
+  ]
+}

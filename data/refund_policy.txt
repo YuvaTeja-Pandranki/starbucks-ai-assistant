@@ -1,0 +1,153 @@
+STARBUCKS REFUND AND ORDER CORRECTION POLICY
+Version 3.2 | Effective Date: January 1, 2024
+Confidential — For Internal Store Operations Use Only
+
+================================================================================
+SECTION 1: ELIGIBLE REFUND CONDITIONS
+================================================================================
+
+Starbucks is committed to delivering the highest quality products and customer
+experience. Refunds or order corrections may be issued under the following
+approved conditions:
+
+1.1 WRONG ORDER RECEIVED
+    A customer received a product that does not match what was ordered (e.g.,
+    wrong drink size, wrong beverage type, incorrect food item). Full refund or
+    remake is authorized. No additional approval required for amounts under $50.
+
+1.2 QUALITY ISSUE
+    The product did not meet Starbucks quality standards at the time of
+    delivery or pickup. Examples include:
+    - Beverage served at incorrect temperature (cold hot drink, warm cold drink)
+    - Visibly incorrect preparation (e.g., missing shots, wrong milk)
+    - Food item past freshness date or visibly spoiled
+    - Foreign object found in product
+    A full refund or immediate remake must be offered. Quality issues must be
+    reported within 24 hours of purchase.
+
+1.3 DUPLICATE CHARGE
+    Customer was charged more than once for the same order due to system error
+    or cashier mistake. Full refund of duplicate amount is mandatory and must
+    be processed within 1 business day of report.
+
+1.4 ALLERGIC REACTION / INCORRECT INGREDIENTS
+    Customer received an item containing allergens not disclosed or present in
+    the order (e.g., dairy in a non-dairy order, nut product). Full refund is
+    authorized immediately. An incident report must also be filed within 2
+    hours. Store manager must be notified regardless of order amount.
+
+================================================================================
+SECTION 2: REFUND AMOUNT THRESHOLDS AND APPROVALS
+================================================================================
+
+Refund authority is tiered based on transaction amount to ensure appropriate
+oversight and financial control.
+
+2.1 UNDER $50.00 — STORE MANAGER APPROVAL
+    - Authorized by: Store Manager or Shift Supervisor (designated)
+    - Process: Can be approved and processed on the spot via POS system
+    - Documentation: Standard refund log entry required
+    - Notification: No district notification required
+
+2.2 $50.00 TO $100.00 — DISTRICT MANAGER NOTIFICATION REQUIRED
+    - Authorized by: Store Manager
+    - Process: Manager approves but must notify District Manager within 4 hours
+    - Documentation: Refund log + brief written justification submitted to DM
+    - Notification: District Manager email/message notification mandatory
+    - AI Systems: Human-in-the-loop (HITL) approval required before processing
+
+2.3 ABOVE $100.00 — DISTRICT MANAGER APPROVAL REQUIRED
+    - Authorized by: District Manager only
+    - Process: Store Manager submits refund request; DM must approve before
+      any funds are returned to customer
+    - Documentation: Full incident report + itemized receipt + customer ID
+    - Notification: Regional Operations team copied on all approvals
+    - Timeline: DM must respond within 2 business hours; customer informed
+      of pending review
+    - AI Systems: AI may not approve or recommend approval; human decision only
+
+================================================================================
+SECTION 3: TIME WINDOW RESTRICTIONS
+================================================================================
+
+3.1 STANDARD REFUND WINDOW — 7 CALENDAR DAYS
+    Applies to: Wrong order, duplicate charge, defective product
+    Customers must report the issue within 7 days of the original transaction
+    date. Requests beyond this window will not be processed without Regional
+    Manager exception approval.
+
+3.2 QUALITY ISSUE WINDOW — 24 HOURS
+    Applies to: Temperature issues, preparation quality complaints
+    Due to the perishable nature of beverages and food, quality complaints must
+    be submitted within 24 hours of purchase. Complaints received after this
+    window will be assessed on a case-by-case basis by the Store Manager.
+
+3.3 CHANGED MIND / BUYER'S REMORSE — 30 MINUTES
+    Applies to: Customer who changes their mind after receiving the order
+    Only eligible for refund if reported within 30 minutes of order fulfillment.
+    Product must be unused and in original condition where possible.
+    Changed-mind refunds for amounts above $50.00 are subject to District
+    Manager review and are not guaranteed.
+
+================================================================================
+SECTION 4: NON-REFUNDABLE SCENARIOS
+================================================================================
+
+The following situations do not qualify for a refund under standard policy:
+
+4.1 Promotional or discounted items marked as "Final Sale"
+4.2 Digital gift card purchases once the card has been activated and used
+4.3 Mobile orders that have been fully prepared and are awaiting pickup for
+    more than 30 minutes (customer no-show)
+4.4 Customization errors made by the customer (e.g., ordered wrong size,
+    selected wrong milk type in app) — a courtesy remake may be offered
+    at manager discretion
+4.5 Orders placed through third-party delivery platforms (Uber Eats, DoorDash)
+    — these must be handled through the respective platform's refund process
+4.6 Bulk/catering orders cancelled after preparation has begun
+4.7 Requests submitted beyond applicable time windows without exception approval
+4.8 Loyalty Stars and reward redemptions — Stars are non-refundable once used
+
+================================================================================
+SECTION 5: STEP-BY-STEP REFUND PROCESS
+================================================================================
+
+STEP 1 — ACKNOWLEDGE THE CUSTOMER
+    Listen to the customer's concern without interruption. Thank them for
+    bringing it to your attention. Do not argue or dispute the claim initially.
+
+STEP 2 — VERIFY ORDER DETAILS
+    Pull up the transaction in the POS system using the order number, loyalty ID,
+    or payment method. Confirm order date, items, and amount paid.
+
+STEP 3 — CONFIRM ELIGIBILITY
+    Cross-reference the reason for refund against Section 1 (eligible conditions)
+    and Section 3 (time windows). If ineligible, explain the policy politely and
+    offer a goodwill gesture (e.g., complimentary drink coupon) if appropriate.
+
+STEP 4 — DETERMINE APPROVAL LEVEL
+    Check the order total against Section 2 thresholds:
+    - Under $50: Proceed with manager/supervisor approval
+    - $50–$100: Notify District Manager before or immediately after processing
+    - Over $100: Pause and contact District Manager for pre-approval
+
+STEP 5 — PROCESS THE REFUND
+    Issue refund to the original payment method:
+    - Credit/Debit Card: 3–5 business days for funds to appear
+    - Mobile Pay: 1–3 business days
+    - Gift Card: Reloaded immediately
+    - Cash: Issued from the register with supervisor sign-off
+
+STEP 6 — LOG THE TRANSACTION
+    Enter all refund details in the Refund Log system immediately after
+    processing. Required fields: order ID, customer name, refund amount,
+    reason code, approving manager, timestamp.
+
+STEP 7 — FOLLOW UP
+    For refunds above $50, a follow-up satisfaction message should be sent to
+    the customer within 24 hours confirming the refund has been processed.
+
+================================================================================
+For policy questions, contact: operations-support@starbucks.internal
+Last Reviewed By: Regional Operations Team | Next Review: July 1, 2024
+================================================================================

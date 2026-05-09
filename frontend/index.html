@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Starbucks AI Assistant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:       #00704A;
+      --green-dark:  #005C3C;
+      --green-light: #D4EDDA;
+      --green-msg:   #00704A;
+      --user-msg:    #F0F0F0;
+      --orange:      #FF8C00;
+      --red:         #D93025;
+      --text:        #1A1A1A;
+      --muted:       #6B7280;
+      --border:      #E5E7EB;
+      --white:       #FFFFFF;
+      --bg:          #F7F7F7;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    /* ── LAYOUT ── */
+    .app {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      max-width: 820px;
+      margin: 0 auto;
+      background: var(--white);
+      box-shadow: 0 0 40px rgba(0,0,0,0.10);
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--green);
+      color: var(--white);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      gap: 12px;
+    }
+    .header-left { display: flex; align-items: center; gap: 12px; }
+    .header-logo { font-size: 28px; line-height: 1; }
+    .header-title { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; }
+    .header-sub   { font-size: 12px; opacity: 0.82; margin-top: 2px; }
+
+    .status-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 20px;
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .status-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #4ADE80;
+      transition: background .3s;
+    }
+    .status-dot.offline { background: #F87171; }
+
+    /* ── QUICK ACTIONS ── */
+    .quick-actions {
+      padding: 12px 16px 8px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+      background: var(--white);
+      flex-shrink: 0;
+    }
+    .qa-btn {
+      background: var(--white);
+      border: 1.5px solid var(--green);
+      color: var(--green);
+      border-radius: 20px;
+      padding: 6px 13px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background .15s, color .15s;
+      font-family: inherit;
+      white-space: nowrap;
+    }
+    .qa-btn:hover { background: var(--green); color: var(--white); }
+
+    /* ── CHAT AREA ── */
+    .chat-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      scroll-behavior: smooth;
+    }
+    .chat-area::-webkit-scrollbar { width: 5px; }
+    .chat-area::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 10px; }
+
+    /* ── MESSAGE ROW ── */
+    .msg-row {
+      display: flex;
+      flex-direction: column;
+      max-width: 75%;
+      gap: 3px;
+      animation: fadeUp .2s ease;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .msg-row.bot  { align-self: flex-start; }
+    .msg-row.user { align-self: flex-end;   }
+
+    .bubble {
+      padding: 10px 15px;
+      border-radius: 18px;
+      font-size: 14px;
+      line-height: 1.55;
+      word-break: break-word;
+      white-space: pre-wrap;
+    }
+    .bot  .bubble { background: var(--green); color: var(--white); border-bottom-left-radius: 4px; }
+    .user .bubble { background: var(--user-msg); color: var(--text); border-bottom-right-radius: 4px; }
+
+    .ts {
+      font-size: 10px;
+      color: var(--muted);
+      padding: 0 4px;
+    }
+    .bot  .ts { text-align: left; }
+    .user .ts { text-align: right; }
+
+    /* ── TYPING INDICATOR ── */
+    .typing-row { display: none; }
+    .typing-row.visible { display: flex; }
+    .typing-bubble {
+      background: var(--green);
+      border-radius: 18px 18px 18px 4px;
+      padding: 12px 16px;
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+    .dot {
+      width: 7px; height: 7px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 50%;
+      animation: bounce 1.2s infinite;
+    }
+    .dot:nth-child(2) { animation-delay: .2s; }
+    .dot:nth-child(3) { animation-delay: .4s; }
+    @keyframes bounce {
+      0%, 80%, 100% { transform: translateY(0); }
+      40%           { transform: translateY(-6px); }
+    }
+
+    /* ── HITL CARD ── */
+    .hitl-card {
+      background: var(--white);
+      border: 1.5px solid var(--orange);
+      border-radius: 14px;
+      overflow: hidden;
+      max-width: 360px;
+      width: 100%;
+      box-shadow: 0 2px 12px rgba(255,140,0,0.15);
+      animation: fadeUp .25s ease;
+    }
+    .hitl-banner {
+      background: var(--orange);
+      color: var(--white);
+      padding: 9px 14px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .hitl-body { padding: 14px; }
+    .hitl-row  { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 13px; }
+    .hitl-row span:first-child { color: var(--muted); }
+    .hitl-row span:last-child  { font-weight: 600; }
+    .hitl-actions { display: flex; gap: 10px; margin-top: 14px; }
+    .hitl-btn {
+      flex: 1;
+      padding: 9px;
+      border: none;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity .15s;
+    }
+    .hitl-btn:hover  { opacity: .85; }
+    .hitl-btn:disabled { opacity: .45; cursor: not-allowed; }
+    .hitl-approve { background: var(--green); color: var(--white); }
+    .hitl-reject  { background: var(--red);   color: var(--white); }
+
+    /* ── INPUT BAR ── */
+    .input-bar {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      padding: 12px 16px;
+      border-top: 1px solid var(--border);
+      background: var(--white);
+      flex-shrink: 0;
+    }
+    #msgInput {
+      flex: 1;
+      border: 1.5px solid var(--border);
+      border-radius: 22px;
+      padding: 10px 16px;
+      font-family: inherit;
+      font-size: 14px;
+      resize: none;
+      outline: none;
+      max-height: 120px;
+      line-height: 1.45;
+      transition: border-color .15s;
+      background: var(--bg);
+    }
+    #msgInput:focus { border-color: var(--green); background: var(--white); }
+    #sendBtn {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: var(--green);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background .15s, transform .1s;
+    }
+    #sendBtn:hover   { background: var(--green-dark); }
+    #sendBtn:active  { transform: scale(.92); }
+    #sendBtn svg { width: 18px; height: 18px; fill: var(--white); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 500px) {
+      .msg-row { max-width: 90%; }
+      header   { padding: 12px 14px; }
+      .header-title { font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-left">
+      <div class="header-logo">☕</div>
+      <div>
+        <div class="header-title">Starbucks AI Assistant</div>
+        <div class="header-sub">Store Operations Assistant</div>
+      </div>
+    </div>
+    <div class="status-pill">
+      <div class="status-dot" id="statusDot"></div>
+      <span id="statusText">Connecting…</span>
+    </div>
+  </header>
+
+  <!-- QUICK ACTIONS -->
+  <div class="quick-actions">
+    <button class="qa-btn" onclick="quickSend('Check refund eligibility for order ORD-001')">🔍 Check Refund ORD-001</button>
+    <button class="qa-btn" onclick="quickSend('Can I approve a refund for order ORD-003?')">⚠️ Check Refund ORD-003</button>
+    <button class="qa-btn" onclick="quickSend('What is the inventory status for store STR-101?')">📦 Inventory STR-101</button>
+    <button class="qa-btn" onclick="quickSend('What is the refund policy for quality issues?')">📋 Refund Policy</button>
+    <button class="qa-btn" onclick="quickSend('I need to process a high value refund of $87 for order ORD-003')">💰 High Value Refund</button>
+  </div>
+
+  <!-- CHAT -->
+  <div class="chat-area" id="chatArea">
+    <!-- typing indicator -->
+    <div class="msg-row bot typing-row" id="typingRow">
+      <div class="typing-bubble">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INPUT -->
+  <div class="input-bar">
+    <textarea id="msgInput" rows="1" placeholder="Ask me about refunds, inventory, or store policy…"></textarea>
+    <button id="sendBtn" onclick="sendMessage()" title="Send">
+      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+    </button>
+  </div>
+
+</div>
+
+<script>
+  const API   = 'http://localhost:8000';
+  const chat  = document.getElementById('chatArea');
+  const input = document.getElementById('msgInput');
+  const typing = document.getElementById('typingRow');
+
+  let history = [];   // [{role:'user'|'assistant', content:'...'}]
+  let pendingApprovalId = null;
+
+  /* ── UTILS ── */
+  function ts() {
+    return new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+  }
+
+  function scrollBottom() {
+    requestAnimationFrame(() => chat.scrollTop = chat.scrollHeight);
+  }
+
+  function showTyping() {
+    typing.classList.add('visible');
+    chat.appendChild(typing);   // move to bottom
+    scrollBottom();
+  }
+
+  function hideTyping() {
+    typing.classList.remove('visible');
+  }
+
+  /* ── ADD MESSAGE BUBBLE ── */
+  function addMessage(role, text) {
+    const row = document.createElement('div');
+    row.className = `msg-row ${role}`;
+
+    const bub = document.createElement('div');
+    bub.className = 'bubble';
+    bub.textContent = text;
+
+    const time = document.createElement('div');
+    time.className = 'ts';
+    time.textContent = ts();
+
+    row.appendChild(bub);
+    row.appendChild(time);
+    chat.insertBefore(row, typing);
+    scrollBottom();
+    return row;
+  }
+
+  /* ── HITL APPROVAL CARD ── */
+  function addHITLCard(approvalId, responseText) {
+    const orderMatch   = responseText.match(/ORD-\w+/i);
+    const amountMatch  = responseText.match(/\$[\d,.]+/);
+
+    const row  = document.createElement('div');
+    row.className = 'msg-row bot';
+
+    const card = document.createElement('div');
+    card.className = 'hitl-card';
+    card.id = `hitl-${approvalId}`;
+
+    card.innerHTML = `
+      <div class="hitl-banner">⚠️ Manager Approval Required</div>
+      <div class="hitl-body">
+        <div class="hitl-row"><span>Approval ID</span><span>${approvalId}</span></div>
+        <div class="hitl-row"><span>Order</span><span>${orderMatch ? orderMatch[0] : 'See details'}</span></div>
+        <div class="hitl-row"><span>Amount</span><span>${amountMatch ? amountMatch[0] : 'See details'}</span></div>
+        <div class="hitl-row"><span>Status</span><span style="color:#FF8C00">Pending Review</span></div>
+        <div class="hitl-actions">
+          <button class="hitl-btn hitl-approve" id="approve-${approvalId}" onclick="resolveHITL('${approvalId}','approved',this)">✅ Approve</button>
+          <button class="hitl-btn hitl-reject"  id="reject-${approvalId}"  onclick="resolveHITL('${approvalId}','rejected',this)">❌ Reject</button>
+        </div>
+        <div id="hitl-result-${approvalId}" style="margin-top:8px;font-size:12px;color:#6B7280;"></div>
+      </div>`;
+
+    const time = document.createElement('div');
+    time.className = 'ts';
+    time.textContent = ts();
+
+    row.appendChild(card);
+    row.appendChild(time);
+    chat.insertBefore(row, typing);
+    scrollBottom();
+  }
+
+  /* ── RESOLVE HITL ── */
+  async function resolveHITL(approvalId, decision, btn) {
+    const card = document.getElementById(`hitl-${approvalId}`);
+    const approveBtn = document.getElementById(`approve-${approvalId}`);
+    const rejectBtn  = document.getElementById(`reject-${approvalId}`);
+    const resultDiv  = document.getElementById(`hitl-result-${approvalId}`);
+
+    approveBtn.disabled = true;
+    rejectBtn.disabled  = true;
+    btn.textContent = decision === 'approved' ? '⏳ Approving…' : '⏳ Rejecting…';
+
+    try {
+      const res = await fetch(`${API}/api/hitl/resolve`, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+          approval_id: approvalId,
+          decision,
+          approver_id: 'store_manager',
+          notes: `${decision === 'approved' ? 'Approved' : 'Rejected'} via Starbucks AI Assistant UI`
+        })
+      });
+      const data = await res.json();
+
+      const icon   = decision === 'approved' ? '✅' : '❌';
+      const colour = decision === 'approved' ? '#00704A' : '#D93025';
+      resultDiv.innerHTML = `<span style="color:${colour};font-weight:600">${icon} ${decision === 'approved' ? 'Approved' : 'Rejected'} by store_manager</span>`;
+
+      const banner = card.querySelector('.hitl-banner');
+      banner.style.background = colour;
+      banner.textContent = icon + (decision === 'approved' ? ' Refund Approved' : ' Refund Rejected');
+
+      addMessage('bot', `${icon} The refund has been ${decision} by store_manager. The audit log has been updated.`);
+    } catch(e) {
+      resultDiv.textContent = '⚠️ Failed to resolve — check server connection.';
+      approveBtn.disabled = false;
+      rejectBtn.disabled  = false;
+      btn.textContent = decision === 'approved' ? '✅ Approve' : '❌ Reject';
+    }
+  }
+
+  /* ── SEND MESSAGE ── */
+  async function sendMessage() {
+    const text = input.value.trim();
+    if (!text) return;
+
+    addMessage('user', text);
+    history.push({role:'user', content: text});
+    input.value = '';
+    input.style.height = 'auto';
+    showTyping();
+
+    try {
+      const res = await fetch(`${API}/api/agent/chat`, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+          message: text,
+          user_id: 'store_manager',
+          store_id: 'STR-101',
+          conversation_history: history.slice(-10)
+        })
+      });
+
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      hideTyping();
+
+      const reply = data.response || 'Sorry, I received an empty response.';
+      addMessage('bot', reply);
+      history.push({role:'assistant', content: reply});
+
+      if (data.requires_approval && data.approval_context?.approval_id) {
+        addHITLCard(data.approval_context.approval_id, reply + ' ' + text);
+      }
+
+    } catch(err) {
+      hideTyping();
+      addMessage('bot', `⚠️ I couldn't reach the server right now. Make sure the API is running on localhost:8000.\n\nError: ${err.message}`);
+    }
+  }
+
+  /* ── QUICK SEND ── */
+  function quickSend(text) {
+    input.value = text;
+    sendMessage();
+  }
+
+  /* ── AUTO-RESIZE TEXTAREA ── */
+  input.addEventListener('input', () => {
+    input.style.height = 'auto';
+    input.style.height = Math.min(input.scrollHeight, 120) + 'px';
+  });
+
+  /* ── ENTER KEY ── */
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+
+  /* ── STATUS CHECK ── */
+  async function checkStatus() {
+    const dot  = document.getElementById('statusDot');
+    const text = document.getElementById('statusText');
+    try {
+      const r = await fetch(`${API}/health`, {mode: 'cors', signal: AbortSignal.timeout(3000)});
+      if (r.ok) {
+        dot.classList.remove('offline');
+        text.textContent = 'Connected';
+      } else throw new Error();
+    } catch {
+      dot.classList.add('offline');
+      text.textContent = 'Offline';
+    }
+  }
+
+  /* ── WELCOME MESSAGE ── */
+  function welcome() {
+    addMessage('bot',
+`👋 Hello! I'm your Starbucks Store Operations Assistant.
+
+I can help you with:
+• Refund approvals and eligibility checks
+• Inventory status and alerts
+• Policy lookups and compliance questions
+• Operational decisions
+
+Try the quick actions above or type your question below!`);
+  }
+
+  /* ── INIT ── */
+  checkStatus();
+  setInterval(checkStatus, 30000);
+  welcome();
+</script>
+</body>
+</html>

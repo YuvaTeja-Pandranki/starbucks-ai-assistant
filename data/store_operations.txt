@@ -1,0 +1,210 @@
+STARBUCKS STORE OPERATIONS GUIDE — STR-101 / STR-102
+Version 2.7 | Effective Date: January 1, 2024
+Confidential — For Store Manager and Shift Supervisor Use Only
+
+================================================================================
+SECTION 1: DAILY OPENING CHECKLIST
+================================================================================
+
+All opening duties must be completed by the Opening Shift Supervisor no later
+than 30 minutes before store opening. Sign off each task in the Daily Log.
+
+1.1 PRE-OPEN SAFETY & SECURITY (60 min before open)
+    [ ] Disarm alarm system and verify no overnight incidents
+    [ ] Inspect exterior: clear entrance, no hazards, signage in place
+    [ ] Check back-of-house for any pest activity or water damage
+    [ ] Verify safe balance matches previous closing report
+    [ ] Confirm all staff have clocked in before open
+
+1.2 EQUIPMENT STARTUP (45 min before open)
+    [ ] Power on all espresso machines — run purge cycle (2x per machine)
+    [ ] Calibrate grinders: check shot time (target 25–30 seconds for espresso)
+    [ ] Power on blenders, warming ovens, and pastry cases
+    [ ] Run POS terminal self-test on all registers
+    [ ] Test mobile order queue connectivity
+    [ ] Verify receipt paper loaded in all terminals
+
+1.3 PRODUCT & INVENTORY SETUP (30 min before open)
+    [ ] Pull daily dairy order from walk-in cooler; check expiration dates
+    [ ] Stock condiment bar: sugars, stirrers, napkins, sleeves, stoppers
+    [ ] Fill syrup pumps — check all bottles against inventory sheet
+    [ ] Load pastry case with morning items; label with freshness times
+    [ ] Verify ready-to-drink case is stocked and refrigerated
+    [ ] Pull inventory counts for CRITICAL and LOW items (see Section 2)
+
+1.4 CLEANLINESS & COMPLIANCE
+    [ ] Sanitize all food contact surfaces with approved solution
+    [ ] Verify handwashing station is stocked (soap, paper towels)
+    [ ] Confirm all team members wearing proper uniform and PPE
+    [ ] Check bathroom cleanliness and restock supplies
+    [ ] Ensure allergen information cards are current and visible
+
+1.5 OPEN STORE
+    [ ] Unlock front door at scheduled open time
+    [ ] Switch CLOSED sign to OPEN
+    [ ] Post daily specials board
+    [ ] Confirm Drive-Thru window is operational (if applicable)
+    [ ] Notify manager on duty that store is open via Operations app
+
+================================================================================
+SECTION 2: INVENTORY MANAGEMENT
+================================================================================
+
+2.1 INVENTORY STATUS DEFINITIONS
+
+    OK       — Stock level is above reorder threshold. No immediate action.
+    LOW      — Stock is below reorder threshold but store can operate normally
+               for the current day. Action required within 24 hours.
+    CRITICAL — Stock level is severely depleted. Immediate risk to service
+               continuity. Emergency action required same day.
+
+2.2 LOW STATUS — ORDER WITHIN 24 HOURS
+    When any item reaches LOW status:
+    - Shift supervisor must flag the item in the Inventory Management System
+    - Store Manager must place a standard replenishment order by end of business
+    - Notify team to conserve usage where possible (e.g., portion control)
+    - If LOW status is detected at open, order must be placed before 10:00 AM
+    - Document in the Daily Inventory Log
+
+2.3 CRITICAL STATUS — SAME-DAY EMERGENCY ORDER
+    When any item reaches CRITICAL status:
+    - Store Manager must be notified immediately regardless of shift
+    - Emergency order must be placed within 1 hour of CRITICAL status detection
+    - Contact Starbucks Supply Chain hotline: 1-800-SBX-SUPPLY
+    - If item is beverage-critical (e.g., espresso, milk), evaluate whether
+      affected menu items should be temporarily removed from the menu board
+    - Notify District Manager if item unavailability will affect service for
+      more than 2 hours
+    - Document incident in Operations Log with timestamps
+
+2.4 DAILY INVENTORY COUNTS
+    - Opening supervisor conducts a spot check of top 10 high-velocity items
+    - Full inventory count conducted every Tuesday and Friday at store close
+    - Variance reports submitted to District Manager if shrinkage > 3%
+    - Dairy products: count every morning before open; expiration check required
+
+================================================================================
+SECTION 3: CUSTOMER ESCALATION TIERS
+================================================================================
+
+3.1 TIER 1 — FRONTLINE RESOLUTION (Barista / Cashier)
+    Scope: Minor complaints, simple service recovery
+    Examples:
+    - Drink made incorrectly — offer immediate remake
+    - Wait time complaint — apologize, provide status update
+    - Missing condiment or sleeve — resolve on the spot
+    Action: Resolve immediately without escalation. No documentation required
+    unless customer requests refund. Log in Daily Feedback Tracker.
+
+3.2 TIER 2 — SHIFT SUPERVISOR INVOLVEMENT
+    Scope: Moderate complaints requiring judgment or minor compensation
+    Examples:
+    - Refund request under $50
+    - Repeated order errors for same customer
+    - Customer threatening to leave a negative review
+    - Minor altercation between customers
+    Action: Shift Supervisor takes over interaction. Assess situation, offer
+    remedy (refund, replacement, goodwill coupon). Document in incident log.
+    Notify Store Manager if not on site.
+
+3.3 TIER 3 — STORE MANAGER + DISTRICT ESCALATION
+    Scope: High-impact complaints, safety concerns, or reputational risk
+    Examples:
+    - Refund request $50–$100 (District notification required)
+    - Refund request above $100 (District approval required)
+    - Allegation of food contamination or allergic reaction
+    - Customer threatens legal action
+    - Social media threat or media presence
+    - Physical altercation or safety threat
+    Action: Store Manager handles directly. Contact District Manager within
+    1 hour. Preserve all transaction records. Do not offer unilateral
+    settlements above $100 without District Manager approval. File incident
+    report within 2 hours.
+
+================================================================================
+SECTION 4: PEAK HOUR PROTOCOLS
+================================================================================
+
+4.1 MORNING RUSH — 7:00 AM TO 9:00 AM
+
+    Staffing: Minimum 4 partners on floor; dedicated drive-thru team if
+    applicable (2 minimum for drive-thru stores)
+
+    Bar Setup:
+    - All espresso machines active with trained baristas
+    - Pre-batch cold brew and iced tea; fill to capacity before 6:45 AM
+    - Mobile order station staffed separately from walk-in counter
+    - Condiment bar restocked at 6:50 AM; monitor every 20 minutes
+
+    Queue Management:
+    - Activate second register when line exceeds 4 customers
+    - Supervisor floats between bar and register to prevent bottlenecks
+    - Target wait time: under 3 minutes from order to handoff
+    - Communicate delays proactively: "Your order will be ready in about
+      [X] minutes" if queue exceeds 5 mobile orders
+
+    Communication:
+    - Barista calls customer names clearly; verify name on cup before handoff
+    - Use "order ahead" signage to direct mobile customers to pickup shelf
+    - Do not process cash-only transactions at peak; redirect to secondary lane
+
+4.2 AFTERNOON RUSH — 12:00 PM TO 2:00 PM
+
+    Staffing: Minimum 3 partners; 1 dedicated to Frappuccino/cold blended
+
+    Bar Setup:
+    - Stock cold cups, Frappuccino bases, and whip cream before noon
+    - Restock syrups used heavily in AM; check Vanilla, Caramel, Hazelnut
+    - Refresh food case with afternoon items (sandwiches, protein boxes)
+
+    Queue Management:
+    - Monitor mobile order queue — surge common from office lunch breaks
+    - Proactively communicate estimated times for large blended orders
+    - Drive-thru: supervisor monitors order accuracy rate during peak window
+
+    After Rush:
+    - Conduct equipment cleaning cycle at 2:15 PM
+    - Log any inventory depletions in system for afternoon reorder review
+    - Debrief shift: note any recurring errors or customer feedback themes
+
+================================================================================
+SECTION 5: STAFF MANAGEMENT RULES
+================================================================================
+
+5.1 SCHEDULING & ATTENDANCE
+    - All schedule changes must be submitted 72 hours in advance via Workforce app
+    - No-call, no-show: Manager must attempt contact within 30 minutes of shift start
+    - Three unexcused absences in 90 days triggers formal performance review
+    - Overtime must be pre-approved by Store Manager; District approval for >10 hrs/week
+
+5.2 TRAINING & CERTIFICATION
+    - All new partners must complete Coffee Passport within first 30 days
+    - Barista certification required before solo bar shifts
+    - Food Handler's Permit required in all locations; kept on file at store
+    - Quarterly safety training mandatory for all staff
+
+5.3 CONDUCT & PERFORMANCE
+    - Cell phone use on the floor is prohibited except in designated break areas
+    - Partners may not consume food or beverages on the floor (break room only)
+    - Customer complaints naming a specific partner must be documented and
+      reviewed within 48 hours by Store Manager
+    - Positive customer feedback should be shared publicly at next team huddle
+
+5.4 BREAK POLICY
+    - Shifts 4–6 hours: one 10-minute paid break
+    - Shifts over 6 hours: one 10-minute paid break + one 30-minute unpaid meal break
+    - Break coverage must be arranged with supervisor before stepping away from post
+    - Drive-thru and bar positions: staggered breaks only; never leave station unmanned
+
+5.5 END OF SHIFT HANDOFF
+    - Outgoing supervisor briefs incoming supervisor on: inventory flags, pending
+      complaints, equipment issues, and any escalated customer situations
+    - Cash drawers balanced and sealed before supervisor departure
+    - All open incidents documented in shift handoff log
+    - Equipment issues reported to maintenance system before close of shift
+
+================================================================================
+For operational questions, contact: store-ops@starbucks.internal
+Emergency Operations Hotline: 1-800-SBX-OPS1
+Last Reviewed By: District Manager, District 7 | Next Review: April 1, 2024
+================================================================================
