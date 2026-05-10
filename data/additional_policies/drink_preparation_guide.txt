@@ -1,0 +1,184 @@
+================================================================================
+STARBUCKS DRINK PREPARATION GUIDE
+Version 5.0 | Effective Date: January 1, 2024
+Applies To: All Baristas and Shift Supervisors
+================================================================================
+
+================================================================================
+SECTION 1: ESPRESSO STANDARDS
+================================================================================
+
+1.1 SHOT FUNDAMENTALS
+Starbucks espresso is pulled exclusively on the Mastrena II superautomatic machine.
+Each shot must meet the following standards before being used in a beverage:
+- Shot volume: 1 oz (single), 2 oz (double — standard for most beverages)
+- Pull time: 18-23 seconds per shot (Mastrena auto-calibrated)
+- Temperature: 195-205°F at point of extraction
+- Color: Rich golden-brown with uniform reddish crema on top
+
+1.2 CREMA STANDARDS
+A properly pulled shot will have a visible crema (foam layer) covering the top.
+Crema that is pale yellow indicates under-extraction — the shot should be discarded.
+Crema that is dark brown and thin indicates over-extraction — discard and recalibrate.
+Shots must be used within 10 seconds of pulling — do not let shots sit and oxidize.
+
+1.3 SHOT QUANTITIES BY DRINK SIZE
+- Short (8 oz): 1 shot
+- Tall (12 oz): 1 shot
+- Grande (16 oz): 2 shots
+- Venti hot (20 oz): 2 shots
+- Venti iced (24 oz): 3 shots
+Customers may request additional shots (extra charge applies per additional shot).
+
+1.4 RISTRETTO AND LUNGO
+- Ristretto: Shorter pull (15 seconds), less volume, sweeter and more concentrated.
+- Lungo: Longer pull (30 seconds), more volume, more bitter notes.
+These are available upon customer request but require manual mode on the Mastrena II.
+
+================================================================================
+SECTION 2: MILK STEAMING GUIDELINES
+================================================================================
+
+2.1 TEMPERATURE STANDARDS
+- Standard temperature: 150°F (65°C) for all hot beverages.
+- Extra hot: 180°F (82°C) — only when customer explicitly requests it.
+- Kids' temperature: 130°F (54°C) — for any children's drinks.
+- Cold foam: Steamed at 32-38°F using cold milk in the cold foam blender.
+Always use a thermometer for accuracy — never guess temperature by touch alone.
+
+2.2 STEAMING TECHNIQUE
+1. Fill the pitcher to just below the spout for small batches (1-2 drinks).
+2. Purge the steam wand before immersing in milk.
+3. Angle the wand slightly off-center to create a whirlpool motion.
+4. Keep the wand tip just below the milk surface during the stretch phase (first 3 sec).
+5. Submerge the wand deeper and allow the whirlpool to integrate foam.
+6. Stop steaming at 5°F below target — carryover heat will reach target.
+7. Purge the steam wand immediately after removing from pitcher.
+8. Wipe wand clean with a damp cloth after every purge.
+
+2.3 FOAM RATIOS BY DRINK TYPE
+- Latte: Minimal foam (microfoam only), silky texture, poured through foam.
+- Cappuccino: Equal parts espresso, steamed milk, and thick foam (3:3:3 ratio).
+- Flat White: Very thin microfoam, ristretto shots, full-cream whole milk standard.
+- Macchiato (Starbucks-style): Built in cup, milk poured first, then espresso.
+
+2.4 MILK ALTERNATIVES
+Temperature guidelines apply equally to all milk alternatives:
+- Oat milk: Steams well, slightly sweeter, excellent foam.
+- Coconut milk: Use Solo coconut milk beverage — does not foam as densely.
+- Almond milk: Foams lightly — do not over-aerate.
+- Soy milk: Steams similarly to dairy but can break at very high temperatures.
+- Lactose-free (Fairlife): Steams identically to whole milk.
+
+================================================================================
+SECTION 3: FRAPPUCCINO BASE RECIPES
+================================================================================
+
+3.1 COFFEE FRAPPUCCINO BASE
+Ingredients per Grande (16 oz):
+- 2 pumps Frappuccino Roast (coffee base)
+- 2 pumps Frappuccino syrup (sweetener)
+- Whole milk to fill line 1 on pitcher
+- Ice to fill line 2
+Blend: 6 seconds on high. Should be thick, consistent, with no large ice chunks.
+
+3.2 CREME FRAPPUCCINO BASE (NO COFFEE)
+Ingredients per Grande:
+- 2 pumps Frappuccino syrup
+- 2 pumps flavoring syrup of choice
+- Whole milk to fill line 1
+- Ice to fill line 2
+Blend: Same as coffee base. Used for Vanilla Bean, Strawberry, Matcha Cremes.
+
+3.3 BLENDING STANDARDS
+- Blender must be clean between every beverage.
+- Never fill above MAX line — lid will not seal safely.
+- Use the Vitamix preset "Frappuccino" where available.
+- If blend is too thin: add 2 scoops of ice and blend again.
+- If blend is too thick: add 1 oz of milk and blend for 3 seconds.
+- Topped with whipped cream unless customer requests "no whip."
+
+================================================================================
+SECTION 4: CUSTOMIZATION GUIDELINES
+================================================================================
+
+4.1 SYRUP PUMPS BY SIZE
+Standard syrup pumps (can be increased or decreased per customer request):
+- Tall: 3 pumps
+- Grande: 4 pumps
+- Venti hot: 5 pumps
+- Venti iced: 6 pumps
+Extra syrup (1 additional pump) incurs an upcharge. Reduced sugar requests (fewer pumps)
+are accommodated at no charge.
+
+4.2 SAUCE VERSUS SYRUP
+- Syrups: Thin, clear or translucent, pump into cup before milk (e.g., vanilla, caramel).
+- Sauces: Thick, drizzle on top or in cup (e.g., mocha sauce, caramel sauce, white mocha).
+Never substitute sauce for syrup quantities — they have different sugar concentrations.
+
+4.3 MILK SUBSTITUTIONS
+All milk alternatives available at a standard upcharge (typically $0.70-$0.80).
+The following substitutions have no upcharge:
+- Removing milk entirely (bone dry cappuccino, etc.)
+- Substituting water for milk in Americano-style drinks.
+
+4.4 ESPRESSO MODIFICATIONS
+- Upside down: Pour espresso over milk instead of under — changes flavor profile.
+- Blonde roast: Available as substitution for standard espresso at no charge.
+- Decaf: Available but takes longer — set customer expectations appropriately.
+- Half-caf: One regular shot, one decaf shot per double shot standard.
+
+================================================================================
+SECTION 5: SEASONAL DRINK PROTOCOLS
+================================================================================
+
+5.1 LAUNCH PROCEDURES
+Seasonal beverages launch on the announced date at store opening.
+Partners must complete seasonal training module in My Starbucks before launch day.
+All seasonal syrups and sauces must be available before the first customer enters.
+
+5.2 PUMPKIN SPICE LATTE (PSL)
+Standard recipe (Grande):
+- 3 pumps pumpkin sauce
+- 2 shots espresso
+- 2% milk steamed to 150°F
+- Whipped cream and pumpkin spice topping
+PSL sauce is seasonal — notify manager when inventory drops below 3 bottles.
+
+5.3 PEPPERMINT MOCHA
+Standard recipe (Grande):
+- 3 pumps mocha sauce
+- 2 pumps peppermint syrup
+- 2 shots espresso
+- 2% milk steamed to 150°F
+- Whipped cream and mocha drizzle
+
+5.4 MATCHA LATTE
+Standard recipe (Grande):
+- 2 scoops matcha powder
+- 4 oz hot water (to dissolve matcha)
+- Milk of choice steamed to 150°F
+Note: Matcha powder must be fully dissolved before adding milk — never add directly.
+
+================================================================================
+SECTION 6: QUALITY CONTROL CHECKS
+================================================================================
+
+6.1 BEFORE SERVING
+Every beverage must pass a visual quality check before handoff:
+- Correct cup size selected.
+- Cup labeled with correct customer name and customizations.
+- No spills or drips on the outside of the cup.
+- Lid properly sealed.
+- Whipped cream not collapsed (if applicable).
+- Correct sleeve applied for hot beverages over 140°F.
+
+6.2 TASTING STANDARD
+Partners are encouraged (not required) to taste test a sip of new seasonal drinks
+during training to understand the flavor profile and confidently describe it to customers.
+
+6.3 REMAKE POLICY
+Any beverage that does not meet quality standards must be remade — no exceptions.
+Substandard beverages should never be served hoping the customer won't notice.
+Waste the original, log it in the waste tracker, and prepare again correctly.
+The cost of a remade drink is far lower than the cost of a dissatisfied customer.

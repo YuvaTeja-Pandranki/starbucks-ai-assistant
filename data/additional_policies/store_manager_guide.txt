@@ -1,0 +1,193 @@
+================================================================================
+STARBUCKS STORE MANAGER GUIDE
+Version 3.5 | Effective Date: January 1, 2024
+Applies To: Store Managers and Assistant Store Managers
+================================================================================
+
+================================================================================
+SECTION 1: DAILY MANAGEMENT RESPONSIBILITIES
+================================================================================
+
+1.1 OPENING DUTIES (60 MINUTES BEFORE OPEN)
+- Arrive 60 minutes before store opening to complete pre-open checklist.
+- Unlock and disable alarm (code in secure manager portal — never share).
+- Review the previous day's closing notes left by the closing supervisor.
+- Verify cash drawer starting amounts (standard $200 till per register).
+- Check temperature logs: refrigerators must be at 38°F or below; freezers at 0°F.
+- Confirm all equipment is operational — run a test shot on the Mastrena II.
+- Review staffing against the scheduled lineup — arrange coverage if needed.
+- Brief the opening team on any product changes, promotions, or customer feedback from yesterday.
+
+1.2 MID-SHIFT MANAGEMENT
+- Walk the floor every 30 minutes during peak hours to observe service flow.
+- Monitor the mobile order queue — queue length over 15 is a red flag for capacity planning.
+- Check customer wait times: intervene if average wait exceeds 5 minutes.
+- Monitor waste: excessive waste may indicate preparation errors or overstocking.
+- Conduct 10-minute huddle with team at shift change (use the "Connection Meeting" format).
+
+1.3 CLOSING DUTIES
+- Ensure closing checklist is 100% complete before locking up.
+- Count all tills — any variance over $10 requires incident documentation.
+- Set the overnight safe with the day's deposits sealed and logged.
+- Complete the nightly food waste log.
+- Lock all external doors and re-enable the alarm.
+- Leave detailed notes for the opening manager in the handover log.
+
+================================================================================
+SECTION 2: WEEKLY REPORTING REQUIREMENTS
+================================================================================
+
+2.1 LABOR REPORT
+Submit the weekly labor efficiency report every Monday by 10 AM via the Store Portal:
+- Actual labor hours vs. planned labor hours.
+- Overtime hours (must be justified if over budget).
+- Turnover incidents (new hires, terminations, resignations in the period).
+Target: Labor as a percentage of sales should not exceed 32%.
+
+2.2 WASTE REPORT
+Submit waste log summary every Sunday by 11:59 PM:
+- Total waste value in dollars.
+- Top 3 wasted items and root cause analysis.
+- Any food safety-related waste (expiration, temperature breach).
+Target: Waste should be under 2% of weekly product cost.
+
+2.3 CUSTOMER FEEDBACK REPORT
+Review all customer feedback from the following sources weekly:
+- Starbucks app reviews (district manager reviews alongside you).
+- Google and Yelp reviews — respond to any negative reviews within 48 hours.
+- In-store feedback forms deposited in the feedback box (behind register).
+Document recurring themes and share with the team at the weekly huddle.
+
+2.4 SALES AND UPSELL METRICS
+The district manager reviews these weekly — be prepared to discuss:
+- Total sales vs. prior year same week.
+- Average ticket value (target: +$0.50 vs. prior year).
+- Top 5 selling items and any significant mix shifts.
+
+================================================================================
+SECTION 3: STAFF PERFORMANCE REVIEWS
+================================================================================
+
+3.1 REVIEW CADENCE
+- New partners: 30-day check-in (informal), 90-day formal review.
+- Established partners: Semi-annual formal review (January and July).
+- Shift supervisors: Quarterly formal review with development plan.
+
+3.2 PERFORMANCE DIMENSIONS
+Reviews assess partners on five dimensions (each scored 1-5):
+1. Customer Connection: Warmth, personalization, and complaint resolution.
+2. Craft: Beverage quality, speed, and consistency.
+3. Safety and Cleanliness: Adherence to food safety and cleaning standards.
+4. Teamwork: Communication, reliability, and support of fellow partners.
+5. Growth: Initiative, learning new skills, and stepping up in difficult situations.
+
+3.3 DOCUMENTATION REQUIREMENTS
+All performance conversations must be documented in the HR system (Workday):
+- Date of conversation.
+- Specific behaviors discussed (positive and developmental).
+- Action plan with agreed timelines.
+- Partner acknowledgment signature (digital or physical).
+
+3.4 PERFORMANCE IMPROVEMENT PLANS
+If a partner scores below 3 in two or more dimensions:
+- Initiate a 30-day Performance Improvement Plan (PIP) in Workday.
+- Hold weekly check-ins during the PIP period.
+- Notify the district manager when a PIP is opened.
+
+================================================================================
+SECTION 4: BUDGET AND COST CONTROL
+================================================================================
+
+4.1 MONTHLY P&L OWNERSHIP
+Store managers are responsible for the store's monthly P&L. Key line items:
+- Revenue: Compare actuals to plan — flag any variance over 5% immediately.
+- COGS: Target 29-31% of revenue. Investigate if above 33%.
+- Labor: Target 30-32% of revenue. Overtime should be less than 3% of total labor.
+- Supplies: Monitor single-use cup and sleeve costs. Offer lids-on-request if costs spike.
+
+4.2 DISCRETIONARY SPENDING
+Managers have discretionary authority for:
+- Minor repairs and maintenance: Up to $250 without approval.
+- Partner supplies (aprons, name tags): Up to $150 per quarter.
+- Customer recovery costs: Up to $100 per incident without escalation.
+Anything above these thresholds requires district manager pre-approval.
+
+4.3 ORDERING AND INVENTORY
+Weekly product orders are placed in the Sysco and Starbucks Distribution Portal by Wednesday 5 PM for Friday delivery. Over-ordering is as costly as under-ordering — calibrate orders to:
+- Current weekly sales velocity (from POS sales mix report).
+- Upcoming promotions or seasonal launches.
+- Variance from prior week's waste log.
+
+================================================================================
+SECTION 5: VENDOR MANAGEMENT AND ORDERING
+================================================================================
+
+5.1 PRIMARY VENDORS
+- Starbucks Distribution Center: All branded products (syrups, cups, beans, food).
+- Sysco Food Services: Supplementary food items and cleaning supplies.
+- Aramark: Linen and uniform services (aprons, towels).
+- Equipment Services: Mastrena and Vitamix service contracts.
+
+5.2 DELIVERY RECEIVING PROCEDURES
+When a delivery arrives:
+1. Count all items against the packing slip — do not sign until count is confirmed.
+2. Inspect for damaged, dented, or expired products.
+3. Reject any refrigerated items that arrived above 41°F (check with probe thermometer).
+4. Log the delivery in the Receiving Log with date, supplier, and any discrepancies.
+5. Inform the district manager of any shortage over $200 in a single delivery.
+
+5.3 VENDOR DISPUTES
+Shortages or damaged goods must be reported within 24 hours of delivery via the
+Supplier Portal. Credit memos typically process within 5 business days.
+
+================================================================================
+SECTION 6: HEALTH AND SAFETY INSPECTIONS
+================================================================================
+
+6.1 HEALTH DEPARTMENT INSPECTIONS
+Health inspections are unannounced. When an inspector arrives:
+1. Welcome the inspector professionally and provide your manager credentials.
+2. Accompany them throughout the inspection — never leave them unescorted.
+3. Answer questions honestly and transparently.
+4. Do not interrupt an observation — wait for the inspector to complete before clarifying.
+5. Request a copy of the inspection report before the inspector leaves.
+
+6.2 CRITICAL VIOLATIONS (IMMEDIATE CLOSURE RISK)
+The following require immediate corrective action during the inspection:
+- Refrigeration failure (above 41°F for more than 2 hours).
+- Evidence of pest activity.
+- Handwashing sink blocked, non-functional, or stocked with product.
+- Partner not wearing gloves when handling ready-to-eat food.
+Notify the district manager immediately if any critical violation is cited.
+
+6.3 SELF-AUDIT SCHEDULE
+Conduct internal health and safety audits monthly using the Health Audit Checklist
+(available in the Store Operations Toolkit). Score must be above 90/100 to avoid
+a mandatory district manager review.
+
+================================================================================
+SECTION 7: CRISIS MANAGEMENT PROTOCOLS
+================================================================================
+
+7.1 FOOD SAFETY INCIDENT (CUSTOMER ILLNESS REPORT)
+If a customer reports illness potentially linked to store products:
+1. Take the report seriously — do not dismiss or minimize.
+2. Collect: customer name, contact, item consumed, symptoms, time of consumption.
+3. Immediately pull and quarantine any remaining product from the same batch.
+4. Notify the district manager and the Starbucks Food Safety Hotline: 1-888-XXX-XXXX.
+5. Do not speak to media. Direct all inquiries to media@starbucks.com.
+6. Cooperate fully with any health department investigation.
+
+7.2 DATA BREACH OR POS SYSTEM COMPROMISE
+If there is reason to believe the POS system or customer data has been compromised:
+1. Immediately switch to manual order-taking and cash-only transactions.
+2. Do not attempt to reset or reboot the POS — preserve the state for IT investigation.
+3. Call the Starbucks IT Security Hotline: 1-888-XXX-XXXX.
+4. Notify the district manager within 30 minutes.
+
+7.3 ADVERSE WEATHER OR EMERGENCY CLOSURE
+In the event of mandatory closure (weather, utility failure, emergency):
+1. Post store closure on the Starbucks app via the Store Portal within 15 minutes.
+2. Notify all scheduled partners via Teamworks message.
+3. Complete the Emergency Closure Form and submit to the district manager.
+4. Preserve perishable inventory using dry ice from the emergency supply if power is out.

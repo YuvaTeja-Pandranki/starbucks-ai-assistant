@@ -1,54 +1,166 @@
 {
-  "store_id": "STR-101",
-  "last_updated": "2024-01-15T06:00:00",
-  "inventory": [
+  "stores": [
     {
-      "item_id": "INV-001",
-      "name": "Whole Milk",
-      "unit": "gallons",
-      "current_stock": 12,
-      "reorder_threshold": 20,
-      "max_capacity": 60,
-      "status": "LOW",
-      "supplier": "Dairy Fresh Co.",
-      "last_restocked": "2024-01-13T07:00:00",
-      "notes": "Stock falling below threshold — order within 24 hours"
+      "store_id": "STR-101",
+      "last_updated": "2024-01-15T06:00:00",
+      "inventory": [
+        {
+          "item_id": "INV-001",
+          "name": "Whole Milk",
+          "unit": "gallons",
+          "current_stock": 12,
+          "reorder_threshold": 20,
+          "max_capacity": 60,
+          "status": "LOW",
+          "supplier": "Dairy Fresh Co.",
+          "last_restocked": "2024-01-13T07:00:00",
+          "notes": "Stock falling below threshold — order within 24 hours"
+        },
+        {
+          "item_id": "INV-002",
+          "name": "Espresso Beans",
+          "unit": "lbs",
+          "current_stock": 45,
+          "reorder_threshold": 30,
+          "max_capacity": 100,
+          "status": "OK",
+          "supplier": "Starbucks Central Roastery",
+          "last_restocked": "2024-01-14T08:00:00",
+          "notes": ""
+        },
+        {
+          "item_id": "INV-003",
+          "name": "Vanilla Syrup",
+          "unit": "bottles (1L)",
+          "current_stock": 3,
+          "reorder_threshold": 10,
+          "max_capacity": 30,
+          "status": "CRITICAL",
+          "supplier": "Starbucks Beverage Supplies",
+          "last_restocked": "2024-01-10T09:00:00",
+          "notes": "CRITICAL — initiate same-day emergency order immediately"
+        },
+        {
+          "item_id": "INV-004",
+          "name": "Paper Cups Large",
+          "unit": "units",
+          "current_stock": 200,
+          "reorder_threshold": 100,
+          "max_capacity": 500,
+          "status": "OK",
+          "supplier": "Starbucks Packaging Supplies",
+          "last_restocked": "2024-01-12T10:00:00",
+          "notes": ""
+        }
+      ]
     },
     {
-      "item_id": "INV-002",
-      "name": "Espresso Beans",
-      "unit": "lbs",
-      "current_stock": 45,
-      "reorder_threshold": 30,
-      "max_capacity": 100,
-      "status": "OK",
-      "supplier": "Starbucks Central Roastery",
-      "last_restocked": "2024-01-14T08:00:00",
-      "notes": ""
+      "store_id": "STR-102",
+      "last_updated": "2026-05-10T06:00:00",
+      "inventory": [
+        {
+          "item_id": "INV-101",
+          "name": "Oat Milk",
+          "unit": "cartons",
+          "current_stock": 5,
+          "reorder_threshold": 15,
+          "max_capacity": 40,
+          "status": "CRITICAL",
+          "supplier": "Oatly Distribution",
+          "last_restocked": "2026-05-08T07:00:00",
+          "notes": "CRITICAL — oat milk demand high due to seasonal menu; order immediately"
+        },
+        {
+          "item_id": "INV-102",
+          "name": "Pumpkin Spice Syrup",
+          "unit": "bottles (1L)",
+          "current_stock": 8,
+          "reorder_threshold": 10,
+          "max_capacity": 25,
+          "status": "LOW",
+          "supplier": "Starbucks Beverage Supplies",
+          "last_restocked": "2026-05-07T09:00:00",
+          "notes": "Stock falling below threshold — order within 24 hours"
+        },
+        {
+          "item_id": "INV-103",
+          "name": "Cold Brew Concentrate",
+          "unit": "liters",
+          "current_stock": 20,
+          "reorder_threshold": 20,
+          "max_capacity": 50,
+          "status": "OK",
+          "supplier": "Starbucks Central Roastery",
+          "last_restocked": "2026-05-09T08:00:00",
+          "notes": ""
+        },
+        {
+          "item_id": "INV-104",
+          "name": "Paper Cups Medium",
+          "unit": "units",
+          "current_stock": 150,
+          "reorder_threshold": 100,
+          "max_capacity": 400,
+          "status": "OK",
+          "supplier": "Starbucks Packaging Supplies",
+          "last_restocked": "2026-05-06T10:00:00",
+          "notes": ""
+        }
+      ]
     },
     {
-      "item_id": "INV-003",
-      "name": "Vanilla Syrup",
-      "unit": "bottles (1L)",
-      "current_stock": 3,
-      "reorder_threshold": 10,
-      "max_capacity": 30,
-      "status": "CRITICAL",
-      "supplier": "Starbucks Beverage Supplies",
-      "last_restocked": "2024-01-10T09:00:00",
-      "notes": "CRITICAL — initiate same-day emergency order immediately"
-    },
-    {
-      "item_id": "INV-004",
-      "name": "Paper Cups Large",
-      "unit": "units",
-      "current_stock": 200,
-      "reorder_threshold": 100,
-      "max_capacity": 500,
-      "status": "OK",
-      "supplier": "Starbucks Packaging Supplies",
-      "last_restocked": "2024-01-12T10:00:00",
-      "notes": ""
+      "store_id": "STR-103",
+      "last_updated": "2026-05-10T06:00:00",
+      "inventory": [
+        {
+          "item_id": "INV-201",
+          "name": "Matcha Powder",
+          "unit": "tins (100g)",
+          "current_stock": 2,
+          "reorder_threshold": 8,
+          "max_capacity": 20,
+          "status": "CRITICAL",
+          "supplier": "Starbucks Beverage Supplies",
+          "last_restocked": "2026-05-06T09:00:00",
+          "notes": "CRITICAL — matcha latte demand high; emergency order required today"
+        },
+        {
+          "item_id": "INV-202",
+          "name": "Caramel Sauce",
+          "unit": "bottles (1L)",
+          "current_stock": 15,
+          "reorder_threshold": 12,
+          "max_capacity": 30,
+          "status": "OK",
+          "supplier": "Starbucks Beverage Supplies",
+          "last_restocked": "2026-05-08T08:00:00",
+          "notes": ""
+        },
+        {
+          "item_id": "INV-203",
+          "name": "Almond Milk",
+          "unit": "cartons",
+          "current_stock": 4,
+          "reorder_threshold": 10,
+          "max_capacity": 30,
+          "status": "LOW",
+          "supplier": "Silk Distribution",
+          "last_restocked": "2026-05-07T07:00:00",
+          "notes": "Stock falling below threshold — order within 24 hours"
+        },
+        {
+          "item_id": "INV-204",
+          "name": "Napkins",
+          "unit": "units",
+          "current_stock": 500,
+          "reorder_threshold": 200,
+          "max_capacity": 1000,
+          "status": "OK",
+          "supplier": "Starbucks Packaging Supplies",
+          "last_restocked": "2026-05-05T10:00:00",
+          "notes": ""
+        }
+      ]
     }
   ]
 }

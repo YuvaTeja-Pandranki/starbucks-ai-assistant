@@ -16,6 +16,10 @@ class Config:
 
     PINECONE_API_KEY: str = os.getenv("PINECONE_API_KEY", "")
     PINECONE_INDEX_NAME: str = os.getenv("PINECONE_INDEX_NAME", "starbucks-knowledge")
+    PINECONE_DIMENSION: int = 384
+    PINECONE_METRIC: str = "cosine"
+    PINECONE_CLOUD: str = os.getenv("PINECONE_CLOUD", "aws")
+    PINECONE_REGION: str = os.getenv("PINECONE_REGION", "us-east-1")
 
     SLACK_BOT_TOKEN: str = os.getenv("SLACK_BOT_TOKEN", "")
     SLACK_APP_TOKEN: str = os.getenv("SLACK_APP_TOKEN", "")

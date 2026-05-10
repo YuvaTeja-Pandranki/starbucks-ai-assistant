@@ -1,0 +1,202 @@
+================================================================================
+STARBUCKS POS SYSTEM GUIDE — ORACLE SIMPHONY
+Version 2.8 | Effective Date: January 1, 2024
+Applies To: All Partners Authorized to Operate the Register
+================================================================================
+
+================================================================================
+SECTION 1: OPENING THE REGISTER
+================================================================================
+
+1.1 STARTING YOUR SESSION
+1. Power on the POS terminal if it is off — press the power button on the back panel.
+2. Wait for the Oracle Simphony login screen to appear (approximately 60 seconds).
+3. Enter your 4-digit Partner PIN. Never share your PIN — each transaction is logged
+   against the PIN that processed it.
+4. Select your register assignment from the Till Management screen.
+5. Count the starting cash in the till — verify against the printed Starting Till Report.
+   Standard starting till: $200 (4 x $20, 10 x $10, 20 x $5, 30 x $1, coin roll set).
+6. If the till does not match the Starting Till Report, notify the shift supervisor
+   before processing any transactions.
+
+1.2 TILL ASSIGNMENT
+Each partner is assigned to a specific till at the start of each shift. Do not process
+transactions on another partner's till without a supervisor till transfer authorization.
+
+================================================================================
+SECTION 2: PROCESSING DIFFERENT PAYMENT TYPES
+================================================================================
+
+2.1 CASH PAYMENTS
+1. Enter the order total and press [TENDER].
+2. Select [CASH] on the payment screen.
+3. Count the cash received from the customer in full view of the customer.
+4. Enter the amount tendered — the system will calculate change automatically.
+5. Count change back to the customer in descending denomination order.
+6. Place the customer's cash on the till ledge until the transaction closes —
+   never put cash in the drawer before giving change.
+7. Press [CLOSE] to finalize the transaction and print the receipt.
+
+2.2 CREDIT/DEBIT CARD
+1. Enter the order total and press [TENDER].
+2. Select [CREDIT/DEBIT].
+3. Direct the customer to tap, insert, or swipe their card on the PIN pad.
+4. For chip transactions: do not remove the card until the POS displays "Remove Card."
+5. For transactions over $50: the system will prompt for a signature on the PIN pad.
+6. Confirm the approved transaction and offer a receipt.
+Note: Never manually key in card numbers — if the card cannot read, ask for alternate payment.
+
+2.3 STARBUCKS MOBILE APP AND REWARDS
+1. Press [TENDER] > [STARBUCKS APP].
+2. Ask the customer to open their Starbucks app and present the barcode/QR code.
+3. Hold the barcode scanner over the code until it beeps.
+4. The system will deduct the balance or apply the Stars redemption automatically.
+5. If the scan fails after 3 attempts: have the customer open the manual barcode
+   (bottom of the app payment screen) and enter the 16-digit code manually.
+6. Stars are credited to the customer's account within 24 hours of the transaction.
+
+2.4 STARBUCKS GIFT CARDS
+1. Press [TENDER] > [GIFT CARD].
+2. Swipe or scan the physical gift card, or scan the digital card in the app.
+3. The POS will display the current balance on the card.
+4. If the balance is insufficient: the system will prompt for a split tender.
+   Select [SPLIT] and process the remaining balance on any alternate payment method.
+5. To check a gift card balance without a purchase: press [GIFT CARD] > [BALANCE INQUIRY].
+
+2.5 CORPORATE ACCOUNTS AND PURCHASE ORDERS
+Corporate accounts must be pre-approved and registered in the system.
+1. Press [TENDER] > [CORPORATE].
+2. Select the corporate account from the dropdown list.
+3. Enter the employee's corporate ID or purchase order number.
+4. The system will verify the account and apply the corporate discount if applicable.
+5. A receipt will print — give the original to the customer for expense reporting.
+
+2.6 SPLIT PAYMENTS
+To split a payment across two methods:
+1. Press [TENDER] > [SPLIT TENDER].
+2. Enter the amount to be charged to the first payment method.
+3. Process the first payment type.
+4. The system will prompt for the remaining balance on a second method.
+5. Process the second payment type to close the transaction.
+
+================================================================================
+SECTION 3: APPLYING DISCOUNTS AND PROMOTIONS
+================================================================================
+
+3.1 PARTNER DISCOUNT
+1. Before tendering, press [DISCOUNT] > [PARTNER DISCOUNT].
+2. The system will prompt for the partner's 8-digit partner number.
+3. Enter the partner number — the 30% discount applies automatically.
+4. Partner discount cannot be combined with Stars redemption in the same transaction.
+
+3.2 PROMOTIONAL DISCOUNTS (HAPPY HOUR, BOGO)
+Promotions are loaded into the POS automatically — no manual entry needed.
+If a promotion is not applying automatically:
+1. Confirm the date and time of the promotion match the current transaction.
+2. Verify the qualifying items are in the cart.
+3. Press [PROMO OVERRIDE] — enter your manager PIN — and manually apply the promotion code.
+4. Log all manual promotion overrides in the Discount Override Log.
+
+3.3 MILITARY AND FIRST RESPONDER DISCOUNTS
+1. Verify identification (badge, military ID) — do not skip this step.
+2. Press [DISCOUNT] > [MILITARY/FIRST RESPONDER].
+3. The 10% discount applies to all menu items for the individual.
+4. Note: discount does not apply to bottled items or merchandise.
+
+================================================================================
+SECTION 4: HANDLING VOIDS AND REFUNDS IN POS
+================================================================================
+
+4.1 VOIDING A TRANSACTION (SAME SESSION)
+A void cancels a transaction before the end of the business day:
+1. Press [MANAGER FUNCTIONS] — enter manager PIN.
+2. Select [VOID TRANSACTION].
+3. Enter the transaction number from the receipt or swipe the customer's payment card.
+4. Confirm the void — the original payment method will be reversed automatically.
+5. Cash voids require cash to be physically returned to the customer from the till.
+6. Log all voids in the Void Log with reason code.
+
+4.2 PROCESSING A REFUND (DIFFERENT SESSION OR PRIOR DAY)
+Refunds after the business day are closed require manager authorization:
+1. Press [MANAGER FUNCTIONS] — enter manager PIN.
+2. Select [REFUND].
+3. Enter the original transaction number (from the customer's receipt) or search by date.
+4. Select the items to refund — partial refunds are supported.
+5. Choose the refund method:
+   - [ORIGINAL METHOD]: Refunds to the card or account used at purchase.
+   - [CASH]: Only for transactions under $20 — requires manager approval for over $20.
+   - [GIFT CARD]: Issue a new Starbucks gift card loaded with the refund amount.
+6. Confirm the refund — a refund receipt will print automatically.
+7. Document in the Refund Log: transaction number, amount, reason, approver PIN.
+
+4.3 PARTIAL REFUNDS
+Partial refunds follow the same steps as full refunds but select only the specific
+items being refunded. Common use cases:
+- Customer received wrong size and prefers a price adjustment.
+- One item in a multi-item order was incorrect.
+
+4.4 REFUND AUTHORITY LIMITS
+- Partners: May process refunds up to $25 using their own PIN (requires manager approval).
+- Shift Supervisors: Up to $50 without additional authorization.
+- Store Managers: Unlimited refund authority within the system.
+
+================================================================================
+SECTION 5: END OF DAY RECONCILIATION
+================================================================================
+
+5.1 RUNNING THE END-OF-DAY REPORT
+At closing (after the last transaction):
+1. Press [MANAGER FUNCTIONS] > [END OF DAY].
+2. Print the Z-Report (full daily summary — prints once and cannot be reprinted).
+3. Review: Total sales, payment method breakdown, void summary, discount summary.
+
+5.2 TILL COUNT
+1. Remove the till from the register and carry it to the back office.
+2. Count all denominations separately using the counting tray.
+3. Enter each denomination into the Till Count Sheet.
+4. The system will calculate the expected total vs. actual.
+5. Variance under $1.00: Acceptable — log and proceed.
+6. Variance $1.01-$10.00: Investigate — check void log and discount log.
+7. Variance over $10.00: Mandatory incident report — notify district manager.
+
+5.3 SAFE DROP PROCEDURE
+All cash above the $300 safe-balance threshold must be dropped into the safe:
+1. Count and band bills in $100 bundles.
+2. Complete the Safe Drop Envelope with date, amount, partner initials.
+3. Seal the envelope and deposit through the safe drop slot.
+4. Log the drop in the Cash Management Log immediately.
+
+================================================================================
+SECTION 6: COMMON ERROR CODES AND SOLUTIONS
+================================================================================
+
+ERROR 1001 — NETWORK TIMEOUT
+Cause: POS lost connection to the payment processor.
+Solution: Wait 30 seconds and retry. If persistent, switch to offline mode by pressing
+[OFFLINE] and process card transactions manually with the imprinter. Contact IT at ext. 5100.
+
+ERROR 2003 — CARD DECLINED
+Cause: Customer's card was declined by their bank.
+Solution: Ask the customer to use an alternate payment method. Do not reveal the
+reason for decline — it is between the customer and their bank.
+
+ERROR 3007 — GIFT CARD BALANCE INSUFFICIENT
+Cause: Gift card does not have enough balance for the transaction.
+Solution: Split the tender. Press [SPLIT] and charge the remainder to another method.
+
+ERROR 4012 — LOYALTY ACCOUNT NOT FOUND
+Cause: The Starbucks Rewards barcode could not be matched to an account.
+Solution: Ask the customer to refresh their app and try again. If still failing, complete
+the transaction without Stars credit and advise the customer to contact Rewards support.
+
+ERROR 5500 — PRINTER PAPER OUT
+Cause: Receipt printer paper roll is empty.
+Solution: Open the printer cover on the right of the terminal. Remove the empty spool.
+Insert a new 80mm thermal paper roll (stored under counter, right side). Close the cover
+and press [TEST PRINT] to confirm alignment before processing next transaction.
+
+ERROR 9999 — SYSTEM FAULT
+Cause: Unrecoverable POS system error.
+Solution: Note the full error message displayed. Do not attempt to resolve independently.
+Call POS Support immediately: 1-888-XXX-XXXX. Switch to manual order pad and cash-only
+operations until the system is restored. A manager must authorize all manual transactions.

@@ -8,7 +8,7 @@ from backend.models.schemas import (
     HITLApprovalRequest,
     HITLApprovalResponse,
 )
-from backend.routers import inventory, policy, refund
+from backend.routers import ingestion, inventory, policy, refund
 from backend.services.hitl_service import get_all_pending, get_audit_log, resolve_approval
 
 app = FastAPI(
@@ -28,6 +28,7 @@ app.add_middleware(
 app.include_router(refund.router)
 app.include_router(inventory.router)
 app.include_router(policy.router)
+app.include_router(ingestion.router)
 
 
 @app.get("/")

@@ -1,10 +1,21 @@
-# ☕ Starbucks AI Assistant — GenAI Operations POC
+# ☕ Starbucks AI Assistant — GenAI Operations POC `v1.1.0`
 
 ## Project Story
 
 This project is a hands-on implementation of the AI platform I architected and delivered at Starbucks as a Senior AI/ML Engineer. Rather than just describing it on a resume, I rebuilt the core concepts as a working POC to demonstrate the end-to-end system design, technical decisions, and business value in a tangible way. Every component — from the agent orchestration layer to the HITL approval workflow — reflects real engineering decisions made under production constraints.
 
 The system enables store managers to resolve operational decisions using natural language — refund approvals, inventory alerts, policy lookups, and compliance checks — all through a conversational interface. A manager can type "Should I refund order ORD-003 for $87?" and receive a structured decision with policy citations, escalation to human approval when warranted, and a full audit trail. Every component maps directly to what was built in production at enterprise scale, with the local stack intentionally mirroring the AWS production architecture so the upgrade path is a configuration change, not a rewrite.
+
+---
+
+## What's New in v1.1.0
+
+- 🚀 Pinecone cloud vectorstore replacing local FAISS (221 vectors indexed)
+- 📚 8 policy documents covering refunds, operations, customer service, employee handbook, drink prep, POS system
+- 🏪 Multi-store support — STR-101, STR-102, STR-103
+- 📦 10 orders with diverse refund scenarios across 3 stores
+- 🔌 New ingestion API — add documents without restarting server
+- ✅ All 8 unit tests still passing
 
 ---
 
@@ -23,37 +34,53 @@ The system enables store managers to resolve operational decisions using natural
 | 3 | `"Process refund for order ORD-003"` | Escalated to HITL — $87.00 exceeds $50 threshold, approve/reject card shown |
 | 4 | `"What is the refund policy for changed minds?"` | RAG response citing refund_policy.txt, 48-hour window rule |
 | 5 | `"Show inventory status for store STR-101"` | Low-stock alerts for items below reorder threshold |
+| 6 | `"Can I approve refund for order ORD-007?"` | Full refund eligible — allergic reaction, escalate to manager |
+| 7 | `"Can I approve refund for order ORD-008?"` | Auto-approved — duplicate charge under $50 threshold |
+| 8 | `"Can I approve refund for order ORD-010?"` | HITL triggered — $145.00 large office order exceeds threshold |
+| 9 | POST `/api/inventory/status` `store_id: STR-102` | Oat Milk CRITICAL alert, Pumpkin Spice Syrup LOW |
+| 10 | POST `/api/ingestion/upload` with new policy doc | Document chunked and added to Pinecone, returns chunks_added count |
 
 ---
 
-## Current Version — v1.0.0 (Local POC)
+## Current Version — v1.1.0 (Cloud RAG + Multi-Store)
 
 ### What Is Built
 
-- **FastAPI async REST API** — 13 endpoints covering agent chat, refund evaluation, inventory status, policy lookup, and HITL management
+- **FastAPI async REST API** — 16 endpoints covering agent chat, refund evaluation, inventory status, policy lookup, HITL management, and document ingestion
 - **LangGraph multi-step agent** — StateGraph with conditional routing between reasoning and tool execution
 - **5 operational tools** — `lookup_order`, `check_refund_eligibility`, `search_policy`, `get_inventory_status`, `trigger_hitl_approval`
-- **RAG pipeline** — HuggingFace embeddings over 3 policy documents, FAISS local index, semantic search with source attribution
+- **RAG pipeline** — HuggingFace embeddings over 8 policy documents, Pinecone cloud index (221 vectors), semantic search with source attribution
 - **Hybrid refund engine** — Rule-based eligibility check (amount, days, reason) layered with LLM interpretation
 - **HITL approval workflow** — Threshold-based escalation ($50), in-memory approval store, full audit log with timestamps
+- **Document ingestion API** — Upload new policy documents and query the vectorstore via REST without scripts or restarts
+- **Multi-store data layer** — 10 orders and 12 inventory items across STR-101, STR-102, STR-103
 - **Slack bot** — Bolt AsyncApp with Block Kit interactive UI, approve/reject buttons, socket mode
 - **Starbucks branded chat UI** — Single-file frontend with real-time status, typing indicators, HITL approval cards
 - **8 passing unit tests** — Refund eligibility logic fully covered with pytest
 
-### Tech Stack v1.0.0
+### Tech Stack v1.1.0
 
 | Layer | Technology | Purpose |
 |-------|-----------|---------|
 | LLM | Groq `llama-3.3-70b-versatile` | Free tier, 100k tokens/day, zero cost |
 | Embeddings | HuggingFace `all-MiniLM-L6-v2` | Local CPU inference, no API key needed |
-| Vector Store | FAISS local index | Semantic search over policy documents |
+| Vector Store | Pinecone cloud (AWS us-east-1) | 221 vectors, 8 documents, serverless |
 | Agent | LangGraph StateGraph | Multi-step reasoning with tool calling |
-| API | FastAPI async | 13 REST endpoints, OpenAPI docs included |
+| API | FastAPI async | 16 REST endpoints, OpenAPI docs included |
 | Frontend | Vanilla HTML/CSS/JS | Starbucks branded chat UI, zero dependencies |
 | HITL Store | In-memory Python dict | Approval workflow simulation with audit log |
 | Tests | Pytest | 8 unit tests, all passing |
 
-### Architecture v1.0.0
+### Data Layer
+
+| Type | Source | Count | Used For |
+|------|--------|-------|----------|
+| Policy Documents | `data/*.txt` + `data/additional_policies/*.txt` | 8 files, 221 vectors | RAG retrieval |
+| Orders | `data/orders.json` | 10 orders, 3 stores | Refund eligibility checks |
+| Inventory | `data/inventory.json` | 12 items, 3 stores | Stock alerts |
+| HITL Approvals | In-memory (DynamoDB in v2.0.0) | Runtime | Approval workflow |
+
+### Architecture v1.1.0
 
 ```
 Browser (Chat UI)
@@ -64,13 +91,14 @@ LangGraph Agent
         ↓
 [lookup_order]  [check_refund_eligibility]  [search_policy]  [get_inventory_status]  [trigger_hitl_approval]
         ↓                                          ↓
-FAISS VectorStore                          Mock JSON Data
-(HuggingFace embeddings)                   (orders.json + inventory.json)
+Pinecone Cloud Index                       Multi-Store JSON Data
+(HuggingFace all-MiniLM-L6-v2 embeddings) (10 orders + 12 inventory items, 3 stores)
+(221 vectors, 8 policy documents)
         ↓
 Groq LLM (llama-3.3-70b-versatile)
 ```
 
-### Quick Start v1.0.0
+### Quick Start v1.1.0
 
 ```bash
 # 1. Clone the repository
@@ -88,18 +116,24 @@ pip install -r requirements.txt
 cp .env.example .env
 # Edit .env and add your GROQ_API_KEY (free at console.groq.com)
 
-# 5. Build the vectorstore
-python scripts/setup_vectorstore.py
+# 5. Add Pinecone API key to .env (get free key at pinecone.io)
+# PINECONE_API_KEY=your_key_here
 
-# 6. Start the API server
+# 6. Build the Pinecone vectorstore
+python scripts/setup_vectorstore.py --store pinecone
+
+# 7. Ingest additional policy documents
+python scripts/ingest_additional_data.py
+
+# 8. Start the API server
 /opt/homebrew/Caskroom/miniconda/base/envs/starbucks-ai/bin/python -m uvicorn backend.main:app \
   --port 8000 --host 0.0.0.0 > /tmp/starbucks_api.log 2>&1 &
 
-# 7. Verify the server is running
+# 9. Verify the server is running
 curl http://localhost:8000/health
 # → {"status":"ok"}
 
-# 8. Open the chat UI
+# 10. Open the chat UI
 open frontend/index.html
 ```
 
@@ -107,11 +141,11 @@ open frontend/index.html
 
 ## Version Roadmap
 
-### v1.1.0 — Cloud Vector Store (Coming Soon)
-- [ ] Migrate FAISS to Pinecone cloud vectorstore
-- [ ] Add document metadata filtering
-- [ ] Improve RAG retrieval accuracy with reranking
-- [ ] Add more policy documents (HR, safety, training)
+### v1.1.0 — Cloud Vector Store ✅ COMPLETE
+- [x] Migrate FAISS to Pinecone cloud vectorstore
+- [x] Add document metadata filtering
+- [x] Improve RAG retrieval accuracy
+- [x] Add more policy documents (221 vectors, 8 documents across 3 stores)
 
 ### v1.2.0 — Live Slack Bot (Coming Soon)
 - [ ] Deploy Slack bot with ngrok tunnel for local testing
@@ -180,27 +214,36 @@ starbucks-ai-assistant/
 │   ├── models/
 │   │   └── schemas.py          # Pydantic v2 request/response models
 │   ├── routers/
+│   │   ├── ingestion.py        # POST upload/rebuild/status — document ingestion API
 │   │   ├── inventory.py        # GET inventory status endpoint
 │   │   ├── policy.py           # POST policy RAG query endpoint
 │   │   └── refund.py           # POST refund evaluation endpoint
 │   ├── services/
 │   │   ├── hitl_service.py     # HITL approval store, audit log, resolve logic
 │   │   ├── llm_service.py      # ChatGroq wrapper with conversation history
-│   │   ├── order_service.py    # JSON order lookup and filtering
-│   │   └── rag_service.py      # FAISS vectorstore build, load, and retrieval
+│   │   ├── order_service.py    # JSON order lookup and filtering (multi-store)
+│   │   ├── pinecone_service.py # Pinecone index management and vector retrieval
+│   │   └── rag_service.py      # RAG router — Pinecone if key set, FAISS fallback
 │   ├── config.py               # Centralised env var config via python-dotenv
 │   └── main.py                 # FastAPI app, CORS, route registration
 ├── data/
+│   ├── additional_policies/
+│   │   ├── customer_service_policy.txt  # Complaint resolution, loyalty, accommodations
+│   │   ├── drink_preparation_guide.txt  # Espresso, milk steaming, Frappuccino recipes
+│   │   ├── employee_handbook.txt        # Conduct, dress code, safety, emergency procedures
+│   │   ├── pos_system_guide.txt         # Payments, voids, refunds, error codes
+│   │   └── store_manager_guide.txt      # Daily ops, reporting, budget, crisis management
 │   ├── compliance_rules.txt    # Regulatory compliance policy document
-│   ├── inventory.json          # Mock store inventory with reorder thresholds
-│   ├── orders.json             # Mock order history (ORD-001 through ORD-004)
+│   ├── inventory.json          # Multi-store inventory — STR-101, STR-102, STR-103
+│   ├── orders.json             # 10 orders across 3 stores (ORD-001 through ORD-010)
 │   ├── refund_policy.txt       # Refund eligibility rules and windows
 │   └── store_operations.txt    # Store operations procedures document
 ├── frontend/
 │   └── index.html              # Single-file Starbucks branded chat UI
 ├── scripts/
-│   ├── seed_data.py            # Populates mock orders and inventory
-│   └── setup_vectorstore.py   # Builds FAISS index from policy documents
+│   ├── ingest_additional_data.py  # Ingests data/additional_policies/ into Pinecone
+│   ├── seed_data.py               # Populates mock orders and inventory
+│   └── setup_vectorstore.py      # Builds vectorstore — --store pinecone|faiss
 ├── slack_bot/
 │   ├── app.py                  # Slack Bolt AsyncApp entry point
 │   ├── blocks.py               # Block Kit message builder functions
@@ -244,7 +287,7 @@ Store managers across multiple locations send requests concurrently. Async endpo
 | Resume Bullet | POC Implementation | Production Target |
 |---------------|-------------------|-------------------|
 | "Engineered AI automation platform using Python and FastAPI with AWS Bedrock and Claude" | FastAPI + Groq `llama-3.3-70b-versatile` (local) | FastAPI + AWS Bedrock Claude 3 Sonnet |
-| "Built RAG pipelines using LangChain and LlamaIndex" | FAISS + HuggingFace `all-MiniLM-L6-v2` embeddings | Pinecone + Amazon Titan Embeddings |
+| "Built RAG pipelines using LangChain and LlamaIndex" | Pinecone + HuggingFace `all-MiniLM-L6-v2` (221 vectors, 8 docs) | Pinecone → Amazon Titan Embeddings + OpenSearch |
 | "Developed agent-based workflows using LangGraph" | LangGraph StateGraph with 5 operational tools | LangGraph + Amazon Strands Agents |
 | "Implemented HITL workflows using AWS Step Functions" | In-memory approval store with audit log | DynamoDB + AWS Step Functions |
 | "Reduced operational resolution time by 35%" | Demonstrated via end-to-end refund flow | Measured in production across all stores |

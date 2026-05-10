@@ -79,6 +79,127 @@
       "refund_reason": null,
       "order_date": "2024-01-14T08:00:00",
       "notes": ""
+    },
+    {
+      "order_id": "ORD-005",
+      "customer": {
+        "name": "Emma Wilson",
+        "email": "emma.wilson@email.com",
+        "loyalty_id": "SBX-334521"
+      },
+      "store_id": "STR-102",
+      "items": [
+        {"name": "Grande Pumpkin Spice Latte", "price": 7.25, "quantity": 1},
+        {"name": "Birthday Cake Pop", "price": 4.50, "quantity": 1}
+      ],
+      "total_amount": 11.75,
+      "payment_method": "mobile_pay",
+      "status": "delivered",
+      "refund_requested": true,
+      "refund_reason": "Wrong milk used - ordered oat milk got regular",
+      "order_date": "2026-05-10T08:45:00",
+      "notes": "Customer has lactose intolerance - oat milk substitution was explicitly requested in app"
+    },
+    {
+      "order_id": "ORD-006",
+      "customer": {
+        "name": "James Brown",
+        "email": "james.brown@email.com",
+        "loyalty_id": "SBX-778902"
+      },
+      "store_id": "STR-101",
+      "items": [
+        {"name": "Venti Cold Brew", "price": 6.25, "quantity": 1},
+        {"name": "Double-Smoked Bacon Breakfast Sandwich", "price": 8.25, "quantity": 1}
+      ],
+      "total_amount": 14.50,
+      "payment_method": "credit_card",
+      "status": "delivered",
+      "refund_requested": false,
+      "refund_reason": null,
+      "order_date": "2026-05-10T07:30:00",
+      "notes": ""
+    },
+    {
+      "order_id": "ORD-007",
+      "customer": {
+        "name": "Sofia Garcia",
+        "email": "sofia.garcia@email.com",
+        "loyalty_id": "SBX-556678"
+      },
+      "store_id": "STR-103",
+      "items": [
+        {"name": "Grande Matcha Latte", "price": 6.50, "quantity": 1}
+      ],
+      "total_amount": 6.50,
+      "payment_method": "gift_card",
+      "status": "delivered",
+      "refund_requested": true,
+      "refund_reason": "Allergic reaction - undisclosed nut ingredient",
+      "order_date": "2026-05-10T09:15:00",
+      "notes": "Customer reported allergic reaction after consuming the drink - medical attention sought"
+    },
+    {
+      "order_id": "ORD-008",
+      "customer": {
+        "name": "Michael Chen",
+        "email": "michael.chen@email.com",
+        "loyalty_id": "SBX-112244"
+      },
+      "store_id": "STR-101",
+      "items": [
+        {"name": "Grande Caramel Macchiato", "price": 7.25, "quantity": 1}
+      ],
+      "total_amount": 7.25,
+      "payment_method": "mobile_pay",
+      "status": "delivered",
+      "refund_requested": true,
+      "refund_reason": "Duplicate charge on account",
+      "order_date": "2026-05-10T10:00:00",
+      "notes": "Customer reports two charges of $7.25 on their bank statement for a single order"
+    },
+    {
+      "order_id": "ORD-009",
+      "customer": {
+        "name": "Priya Patel",
+        "email": "priya.patel@email.com",
+        "loyalty_id": "SBX-887653"
+      },
+      "store_id": "STR-102",
+      "items": [
+        {"name": "Venti Caramel Frappuccino", "price": 8.50, "quantity": 1},
+        {"name": "Eggs & Cheese Protein Box", "price": 9.25, "quantity": 1},
+        {"name": "Chocolate Chip Cookie", "price": 4.25, "quantity": 1}
+      ],
+      "total_amount": 22.00,
+      "payment_method": "credit_card",
+      "status": "delivered",
+      "refund_requested": true,
+      "refund_reason": "Quality issue - items were stale",
+      "order_date": "2026-05-10T11:30:00",
+      "notes": "Customer reported protein box had passed its freshness date and cookie was hard and dry"
+    },
+    {
+      "order_id": "ORD-010",
+      "customer": {
+        "name": "Tom Anderson",
+        "email": "tom.anderson@company.com",
+        "loyalty_id": "SBX-445521"
+      },
+      "store_id": "STR-103",
+      "items": [
+        {"name": "Venti Latte", "price": 7.50, "quantity": 8},
+        {"name": "Grande Cold Brew", "price": 6.25, "quantity": 6},
+        {"name": "Breakfast Sandwich", "price": 8.25, "quantity": 6},
+        {"name": "Blueberry Muffin", "price": 4.25, "quantity": 6}
+      ],
+      "total_amount": 145.00,
+      "payment_method": "corporate_card",
+      "status": "delivered",
+      "refund_requested": true,
+      "refund_reason": "Wrong order entirely - delivered to wrong store",
+      "order_date": "2026-05-10T08:00:00",
+      "notes": "Large office order placed for STR-101 but fulfilled by STR-103 - customer drove to wrong location"
     }
   ]
 }

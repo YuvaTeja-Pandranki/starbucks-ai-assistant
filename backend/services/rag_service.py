@@ -56,9 +56,12 @@ def load_vectorstore() -> FAISS:
 
 
 def retrieve_context(query: str, k: int = 4) -> tuple[str, list[str]]:
+    if config.PINECONE_API_KEY:
+        from backend.services.pinecone_service import retrieve_from_pinecone
+        return retrieve_from_pinecone(query, k=k)
+
     vectorstore = load_vectorstore()
     results = vectorstore.similarity_search(query, k=k)
-
     context = "\n\n".join(doc.page_content for doc in results)
     sources = list({doc.metadata.get("source", "unknown") for doc in results})
     return context, sources

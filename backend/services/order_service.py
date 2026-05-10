@@ -69,6 +69,13 @@ def evaluate_refund_eligibility(order: dict) -> dict:
 def load_inventory(store_id: str) -> list:
     with open(config.INVENTORY_FILE, "r") as f:
         data = json.load(f)
+    # Support both single-store {"store_id": ..., "inventory": [...]}
+    # and multi-store {"stores": [...]} formats
+    if "stores" in data:
+        for store in data["stores"]:
+            if store.get("store_id") == store_id:
+                return store.get("inventory", [])
+        return []
     if data.get("store_id") == store_id:
         return data.get("inventory", [])
     return []
