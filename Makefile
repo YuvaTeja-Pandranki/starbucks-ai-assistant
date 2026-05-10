@@ -5,7 +5,7 @@ run:
 	conda run -n starbucks-ai uvicorn backend.main:app --reload --port 8000
 
 slack:
-	conda run -n starbucks-ai python slack_bot/app.py
+	PYTHONPATH='/Users/yuvatejapandranki/Desktop/starbucks project' conda run -n starbucks-ai python slack_bot/app.py
 
 test:
 	conda run -n starbucks-ai pytest tests/ -v
