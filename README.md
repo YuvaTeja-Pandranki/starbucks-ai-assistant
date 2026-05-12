@@ -1,11 +1,12 @@
-# ☕ Starbucks AI Assistant — GenAI Operations POC `v2.0.0`
+# ☕ Starbucks AI Assistant — GenAI Operations POC `v2.1.0`
 
-![Version](https://img.shields.io/badge/version-v2.0.0-green)
+![Version](https://img.shields.io/badge/version-v2.1.0-green)
 ![Python](https://img.shields.io/badge/python-3.11-blue)
-![AWS](https://img.shields.io/badge/AWS-Bedrock-orange)
+![AWS](https://img.shields.io/badge/AWS-Lambda%20%2B%20Bedrock-orange)
 ![LangGraph](https://img.shields.io/badge/LangGraph-agent-purple)
-![Pinecone](https://img.shields.io/badge/Pinecone-4269_vectors-blue)
+![Pinecone](https://img.shields.io/badge/Pinecone-4133_vectors-blue)
 ![Tests](https://img.shields.io/badge/tests-8_passing-brightgreen)
+![Live](https://img.shields.io/badge/API-Live%20on%20AWS-brightgreen)
 
 ## Project Story
 
@@ -15,26 +16,43 @@ The system enables store managers to resolve operational decisions using natural
 
 ---
 
-## 🚀 Try It Live
+## 🚀 Live Demo
 
-### Option 1 — Run Locally (Full Control)
-Follow the Quick Start guide below to run on your machine.
-All you need is a Groq API key (free) or AWS credentials.
+**API is deployed and publicly accessible on AWS Lambda:**
 
-### Option 2 — View Live Demo (When Server is Running)
-The demo runs on a local server. To share with others temporarily:
-1. Start the API: `make run`
-2. Start ngrok: `ngrok http 8000`
-3. Share the ngrok URL — anyone can access the Swagger UI and Chat UI
+```
+Live API URL: https://ahk5tdm3u0.execute-api.us-east-1.amazonaws.com/Prod/
+```
 
-### Option 3 — Scheduled Demo
-Want to see a live walkthrough? Connect on LinkedIn:
-https://www.linkedin.com/in/yuva-teja-p/
+Test it right now:
 
-### What You Can Demo
-- **Chat UI:** Open `frontend/index.html` with API running
-- **Swagger API:** http://localhost:8000/docs
+```bash
+# Health check
+curl https://ahk5tdm3u0.execute-api.us-east-1.amazonaws.com/Prod/health
+
+# Ask the AI assistant
+curl -X POST https://ahk5tdm3u0.execute-api.us-east-1.amazonaws.com/Prod/api/agent/chat \
+  -H "Content-Type: application/json" \
+  -d '{"message": "What is the refund policy?", "session_id": "demo", "user_id": "viewer", "store_id": "STR-101"}'
+```
+
+### Other Ways to Demo
+- **Run Locally:** Follow the Quick Start guide below (requires Groq API key or AWS credentials)
 - **Slack Bot:** Direct message @Starbucks AI Assistant (requires Slack workspace access)
+- **Scheduled Walkthrough:** Connect on LinkedIn: https://www.linkedin.com/in/yuva-teja-p/
+
+---
+
+## What's New in v2.1.0
+
+- 🚀 FastAPI deployed to AWS Lambda via Mangum ASGI adapter
+- 🌐 Public API Gateway endpoint — live and accessible without running anything locally
+- 🔐 AWS Secrets Manager for all production credentials
+- 📊 Amazon Titan Embeddings v2 replacing HuggingFace (1024d vectors)
+- 🔢 Pinecone re-indexed with 1024d Titan vectors (4,133 chunks across all documents)
+- 🛠️ IAM execution role — no hardcoded credentials in Lambda
+- ⚡ ~4 second response time including cold start
+- 📦 SAM-based deployment with Makefile cross-compilation (no Docker required)
 
 ---
 
@@ -108,7 +126,7 @@ https://www.linkedin.com/in/yuva-teja-p/
 
 ---
 
-## Current Version — v1.1.0 (Cloud RAG + Multi-Store)
+## Current Version — v2.1.0 (AWS Lambda + Titan Embeddings)
 
 ### What Is Built
 
@@ -124,15 +142,17 @@ https://www.linkedin.com/in/yuva-teja-p/
 - **Starbucks branded chat UI** — Single-file frontend with real-time status, typing indicators, HITL approval cards
 - **8 passing unit tests** — Refund eligibility logic fully covered with pytest
 
-### Tech Stack v1.1.0
+### Tech Stack v2.1.0
 
 | Layer | Technology | Purpose |
 |-------|-----------|---------|
-| LLM | Groq `llama-3.3-70b-versatile` | Free tier, 100k tokens/day, zero cost |
-| Embeddings | HuggingFace `all-MiniLM-L6-v2` | Local CPU inference, no API key needed |
-| Vector Store | Pinecone cloud (AWS us-east-1) | 4,269 vectors, 10 documents, serverless |
+| LLM | AWS Bedrock Claude Sonnet 4.5 | Production LLM via cross-region inference profile |
+| Embeddings | Amazon Titan Embed v2 (1024d) | Consistent embeddings local and in Lambda |
+| Vector Store | Pinecone cloud (AWS us-east-1) | 4,133 vectors, serverless |
 | Agent | LangGraph StateGraph | Multi-step reasoning with tool calling |
-| API | FastAPI async | 16 REST endpoints, OpenAPI docs included |
+| API | FastAPI + Mangum + AWS Lambda | Serverless deployment via ASGI adapter |
+| Hosting | AWS API Gateway + Lambda | Public REST endpoint, no server to manage |
+| Secrets | AWS Secrets Manager | Production credentials, IAM execution role |
 | Frontend | Vanilla HTML/CSS/JS | Starbucks branded chat UI, zero dependencies |
 | HITL Store | In-memory Python dict | Approval workflow simulation with audit log |
 | Tests | Pytest | 8 unit tests, all passing |
@@ -162,22 +182,27 @@ https://www.linkedin.com/in/yuva-teja-p/
 > **Production Equivalent:** Internal SharePoint, Confluence, and policy management
 > systems ingested via secure automated pipelines with access controls.
 
-### Architecture v1.1.0
+### Architecture v2.1.0
 
 ```
-Browser (Chat UI)
+Browser / Slack Bot / curl
         ↓
-FastAPI Backend :8000
+AWS API Gateway (REST)
+        ↓
+AWS Lambda (FastAPI via Mangum)
         ↓
 LangGraph Agent
         ↓
 [lookup_order]  [check_refund_eligibility]  [search_policy]  [get_inventory_status]  [trigger_hitl_approval]
         ↓                                          ↓
 Pinecone Cloud Index                       Multi-Store JSON Data
-(HuggingFace all-MiniLM-L6-v2 embeddings) (10 orders + 12 inventory items, 3 stores)
-(4,269 vectors, 10 documents)
+(Amazon Titan Embed v2 — 1024d)            (10 orders + 12 inventory items, 3 stores)
+(4,133 vectors, 12 documents)
         ↓
-Groq LLM (llama-3.3-70b-versatile)
+AWS Bedrock Claude Sonnet 4.5
+(IAM execution role — no hardcoded credentials)
+
+Supporting: AWS Secrets Manager · SAM + API Gateway · CloudWatch Logs
 ```
 
 ### Quick Start v1.1.0
@@ -248,25 +273,27 @@ open frontend/index.html
 - [x] Improved tool calling with explicit agent prompts
 - [x] HITL workflow fully validated on Bedrock
 
-**Planned for v2.1.0+:**
-- [ ] Migrate embeddings to Amazon Titan Embeddings
-- [ ] Migrate vector store to Amazon OpenSearch
-- [ ] Migrate HITL store to DynamoDB with TTL
-- [ ] Deploy API to AWS Lambda + API Gateway via Mangum
-- [ ] Add CloudWatch monitoring and alerting
-- [ ] Add LangSmith LLM observability
-- [ ] AWS Secrets Manager for credentials
-- [ ] SageMaker for model evaluation
+**Shipped in v2.1.0:**
+- [x] Migrate embeddings to Amazon Titan Embeddings (1024d)
+- [x] Deploy API to AWS Lambda + API Gateway via Mangum
+- [x] AWS Secrets Manager for credentials
 
-### v2.1.0 — AWS Full Stack Deployment (Next)
-- [ ] Deploy FastAPI to AWS Lambda using Mangum
-- [ ] API Gateway REST API with custom domain
+### v2.1.0 — AWS Lambda Deployment ✅ COMPLETE
+
+**What Was Built:**
+- [x] Deploy FastAPI to AWS Lambda using Mangum
+- [x] API Gateway REST API with public endpoint
+- [x] Docker container on ECR
+- [x] AWS Secrets Manager for credentials
+- [x] Amazon Titan Embeddings 1024d replacing HuggingFace
+- [x] 4,133 vectors re-ingested (policy + FDA food code + Starbucks conduct)
+- [x] IAM execution role — no hardcoded credentials in Lambda
+
+**Planned for v2.2.0+:**
 - [ ] DynamoDB for HITL approval persistence
-- [ ] Amazon Titan Embeddings replacing HuggingFace
 - [ ] Amazon OpenSearch replacing Pinecone
 - [ ] CloudWatch dashboards and alerting
 - [ ] LangSmith LLM tracing and evaluation
-- [ ] AWS Secrets Manager for all credentials
 
 ### v2.2.0 — Enterprise Features (Planned)
 - [ ] Multi-store data isolation with RBAC
