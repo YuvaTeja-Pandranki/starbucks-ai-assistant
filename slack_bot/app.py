@@ -43,13 +43,21 @@ async def handle_direct_message(event, say, logger):
     try:
         await say("Processing your request... ⏳")
 
-        async with httpx.AsyncClient(timeout=60.0) as client:
-            response = await client.post(f"{API_BASE}/api/agent/chat", json={
-                "message": text,
-                "user_id": user,
-                "store_id": "STR-101",
-                "conversation_history": []
-            })
+        async def _call_api():
+            async with httpx.AsyncClient(timeout=120.0) as client:
+                return await client.post(f"{API_BASE}/api/agent/chat", json={
+                    "message": text,
+                    "user_id": user,
+                    "store_id": "STR-101",
+                    "conversation_history": []
+                })
+
+        api_task = asyncio.create_task(_call_api())
+        try:
+            response = await asyncio.wait_for(asyncio.shield(api_task), timeout=30.0)
+        except asyncio.TimeoutError:
+            await say("Still working on it, complex queries take a moment... 🔍")
+            response = await api_task
 
         if response.status_code == 200:
             data = response.json()

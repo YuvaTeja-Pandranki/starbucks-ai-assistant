@@ -1,3 +1,5 @@
+import time
+
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 from langchain_groq import ChatGroq
 
@@ -11,22 +13,36 @@ def call_llm(
     temperature: float = 0.2,
     max_tokens: int = 800,
 ) -> str:
-    client = ChatGroq(
-        api_key=config.GROQ_API_KEY,
-        model_name=config.GROQ_MODEL,
-        temperature=temperature,
-    )
+    max_retries = 3
+    retry_delay = 5
 
-    messages = [SystemMessage(content=system_prompt)]
-    for item in conversation_history[-6:]:
-        if item.get("role") == "user":
-            messages.append(HumanMessage(content=item["content"]))
-        elif item.get("role") == "assistant":
-            messages.append(AIMessage(content=item["content"]))
-    messages.append(HumanMessage(content=user_message))
-
-    response = client.invoke(messages)
-    return response.content
+    for attempt in range(max_retries):
+        try:
+            client = ChatGroq(
+                api_key=config.GROQ_API_KEY,
+                model_name=config.GROQ_MODEL,
+                temperature=temperature,
+            )
+            messages = [SystemMessage(content=system_prompt)]
+            for item in conversation_history[-6:]:
+                if item.get("role") == "user":
+                    messages.append(HumanMessage(content=item["content"]))
+                elif item.get("role") == "assistant":
+                    messages.append(AIMessage(content=item["content"]))
+            messages.append(HumanMessage(content=user_message))
+            response = client.invoke(messages)
+            return response.content
+        except Exception as e:
+            error_str = str(e)
+            if "rate_limit" in error_str.lower() or "429" in error_str:
+                if attempt < max_retries - 1:
+                    print(f"Rate limit hit, waiting {retry_delay}s before retry {attempt + 1}...")
+                    time.sleep(retry_delay)
+                    retry_delay *= 2
+                else:
+                    return "I am temporarily unavailable due to high demand. Please try again in a few minutes."
+            else:
+                raise e
 
 
 def call_llm_with_context(

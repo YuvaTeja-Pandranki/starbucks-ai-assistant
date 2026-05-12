@@ -97,7 +97,17 @@ def run_agent(
         "approval_id": "",
     }
 
-    result = agent.invoke(initial_state)
+    try:
+        result = agent.invoke(initial_state)
+    except Exception as e:
+        if "rate_limit" in str(e).lower() or "429" in str(e):
+            return {
+                "response": "I am temporarily unavailable due to high demand. Please try again in a few minutes.",
+                "requires_approval": False,
+                "approval_id": "",
+                "message_count": 0,
+            }
+        raise e
 
     final_response = result["messages"][-1].content
 
