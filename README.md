@@ -16,6 +16,8 @@ The system enables store managers to resolve operational decisions using natural
 - 🤖 `get_llm()` factory routes agent between Bedrock and Groq
 - 📋 Explicit tool-calling rules in system prompt — HITL now fires correctly
 - ✅ Full validation: 8/8 unit tests + 5 end-to-end Bedrock scenarios passing
+- 📄 Real public documents added to RAG pipeline (FDA Food Code + Starbucks Business Conduct)
+- 🔢 Pinecone index expanded to 4,269 vectors across 10 documents
 
 ---
 
@@ -32,8 +34,8 @@ The system enables store managers to resolve operational decisions using natural
 
 ## What's New in v1.1.0
 
-- 🚀 Pinecone cloud vectorstore replacing local FAISS (221 vectors indexed)
-- 📚 8 policy documents covering refunds, operations, customer service, employee handbook, drink prep, POS system
+- 🚀 Pinecone cloud vectorstore replacing local FAISS (4,269 vectors indexed)
+- 📚 10 documents covering refunds, operations, customer service, employee handbook, drink prep, POS system, FDA food safety, business conduct
 - 🏪 Multi-store support — STR-101, STR-102, STR-103
 - 📦 10 orders with diverse refund scenarios across 3 stores
 - 🔌 New ingestion API — add documents without restarting server
@@ -83,7 +85,7 @@ The system enables store managers to resolve operational decisions using natural
 - **FastAPI async REST API** — 16 endpoints covering agent chat, refund evaluation, inventory status, policy lookup, HITL management, and document ingestion
 - **LangGraph multi-step agent** — StateGraph with conditional routing between reasoning and tool execution
 - **5 operational tools** — `lookup_order`, `check_refund_eligibility`, `search_policy`, `get_inventory_status`, `trigger_hitl_approval`
-- **RAG pipeline** — HuggingFace embeddings over 8 policy documents, Pinecone cloud index (221 vectors), semantic search with source attribution
+- **RAG pipeline** — HuggingFace embeddings over 10 documents (8 synthetic + 2 real public PDFs), Pinecone cloud index (4,269 vectors), semantic search with source attribution
 - **Hybrid refund engine** — Rule-based eligibility check (amount, days, reason) layered with LLM interpretation
 - **HITL approval workflow** — Threshold-based escalation ($50), in-memory approval store, full audit log with timestamps
 - **Document ingestion API** — Upload new policy documents and query the vectorstore via REST without scripts or restarts
@@ -98,7 +100,7 @@ The system enables store managers to resolve operational decisions using natural
 |-------|-----------|---------|
 | LLM | Groq `llama-3.3-70b-versatile` | Free tier, 100k tokens/day, zero cost |
 | Embeddings | HuggingFace `all-MiniLM-L6-v2` | Local CPU inference, no API key needed |
-| Vector Store | Pinecone cloud (AWS us-east-1) | 221 vectors, 8 documents, serverless |
+| Vector Store | Pinecone cloud (AWS us-east-1) | 4,269 vectors, 10 documents, serverless |
 | Agent | LangGraph StateGraph | Multi-step reasoning with tool calling |
 | API | FastAPI async | 16 REST endpoints, OpenAPI docs included |
 | Frontend | Vanilla HTML/CSS/JS | Starbucks branded chat UI, zero dependencies |
@@ -108,11 +110,27 @@ The system enables store managers to resolve operational decisions using natural
 ### Data Layer
 
 | Type | Source | Count | Used For |
-|------|--------|-------|----------|
-| Policy Documents | `data/*.txt` + `data/additional_policies/*.txt` | 8 files, 221 vectors | RAG retrieval |
+|---|---|---|---|
+| Synthetic Policy Docs | `data/*.txt` + `data/additional_policies/*.txt` | 8 files, 4,269 vectors | RAG - refund, inventory, compliance, operations |
+| Real Public Documents | FDA Food Code + Starbucks Business Conduct (PDF) | 2 files, 4,048 vectors | RAG - food safety, business standards |
 | Orders | `data/orders.json` | 10 orders, 3 stores | Refund eligibility checks |
 | Inventory | `data/inventory.json` | 12 items, 3 stores | Stock alerts |
-| HITL Approvals | In-memory (DynamoDB in v2.0.0) | Runtime | Approval workflow |
+| HITL Approvals | In-memory (DynamoDB in v2.1.0) | Runtime | Approval workflow |
+
+### Document Sources
+
+> **Synthetic Documents:** Operational policies written based on direct experience
+> building the AI platform at Starbucks — refund rules, inventory protocols,
+> compliance requirements, and store operations guides.
+>
+> **Real Public Documents:**
+> - [FDA Food Code](https://www.fda.gov/media/110822/download) — Official US government
+>   food safety regulations for food service workers
+> - [Starbucks Standards of Business Conduct](https://investor.starbucks.com) —
+>   Publicly available corporate conduct guidelines
+>
+> **Production Equivalent:** Internal SharePoint, Confluence, and policy management
+> systems ingested via secure automated pipelines with access controls.
 
 ### Architecture v1.1.0
 
@@ -127,7 +145,7 @@ LangGraph Agent
         ↓                                          ↓
 Pinecone Cloud Index                       Multi-Store JSON Data
 (HuggingFace all-MiniLM-L6-v2 embeddings) (10 orders + 12 inventory items, 3 stores)
-(221 vectors, 8 policy documents)
+(4,269 vectors, 10 documents)
         ↓
 Groq LLM (llama-3.3-70b-versatile)
 ```
@@ -159,6 +177,9 @@ python scripts/setup_vectorstore.py --store pinecone
 # 7. Ingest additional policy documents
 python scripts/ingest_additional_data.py
 
+# 7b. Ingest real PDF documents
+python scripts/ingest_public_docs.py  # ingest real PDF documents
+
 # 8. Start the API server
 /opt/homebrew/Caskroom/miniconda/base/envs/starbucks-ai/bin/python -m uvicorn backend.main:app \
   --port 8000 --host 0.0.0.0 > /tmp/starbucks_api.log 2>&1 &
@@ -179,7 +200,7 @@ open frontend/index.html
 - [x] Migrate FAISS to Pinecone cloud vectorstore
 - [x] Add document metadata filtering
 - [x] Improve RAG retrieval accuracy
-- [x] Add more policy documents (221 vectors, 8 documents across 3 stores)
+- [x] Add more policy documents (4,269 vectors, 10 documents across 3 stores)
 
 ### v1.2.0 — Live Slack Bot ✅ COMPLETE
 - [x] Deploy Slack bot with Socket Mode
@@ -267,6 +288,9 @@ starbucks-ai-assistant/
 │   │   ├── employee_handbook.txt        # Conduct, dress code, safety, emergency procedures
 │   │   ├── pos_system_guide.txt         # Payments, voids, refunds, error codes
 │   │   └── store_manager_guide.txt      # Daily ops, reporting, budget, crisis management
+│   ├── public_docs/                     # Real public PDF documents
+│   │   ├── fda_food_safety.pdf          # FDA Food Code (real government document)
+│   │   └── starbucks_business_conduct.pdf  # Starbucks public conduct guidelines
 │   ├── compliance_rules.txt    # Regulatory compliance policy document
 │   ├── inventory.json          # Multi-store inventory — STR-101, STR-102, STR-103
 │   ├── orders.json             # 10 orders across 3 stores (ORD-001 through ORD-010)
@@ -276,6 +300,7 @@ starbucks-ai-assistant/
 │   └── index.html              # Single-file Starbucks branded chat UI
 ├── scripts/
 │   ├── ingest_additional_data.py  # Ingests data/additional_policies/ into Pinecone
+│   ├── ingest_public_docs.py      # Ingests real PDF documents into Pinecone
 │   ├── seed_data.py               # Populates mock orders and inventory
 │   └── setup_vectorstore.py      # Builds vectorstore — --store pinecone|faiss
 ├── slack_bot/
@@ -321,7 +346,7 @@ Store managers across multiple locations send requests concurrently. Async endpo
 | Resume Bullet | POC Implementation | Production Target |
 |---------------|-------------------|-------------------|
 | "Engineered AI automation platform using Python and FastAPI with AWS Bedrock and Claude" | FastAPI + Groq `llama-3.3-70b-versatile` (local) | FastAPI + AWS Bedrock Claude 3 Sonnet |
-| "Built RAG pipelines using LangChain and LlamaIndex" | Pinecone + HuggingFace `all-MiniLM-L6-v2` (221 vectors, 8 docs) | Pinecone → Amazon Titan Embeddings + OpenSearch |
+| "Built RAG pipelines using LangChain and LlamaIndex" | Pinecone + HuggingFace `all-MiniLM-L6-v2` (4,269 vectors, 10 docs) | Pinecone → Amazon Titan Embeddings + OpenSearch |
 | "Developed agent-based workflows using LangGraph" | LangGraph StateGraph with 5 operational tools | LangGraph + Amazon Strands Agents |
 | "Implemented HITL workflows using AWS Step Functions" | In-memory approval store with audit log | DynamoDB + AWS Step Functions |
 | "Reduced operational resolution time by 35%" | Demonstrated via end-to-end refund flow | Measured in production across all stores |
