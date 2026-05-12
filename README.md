@@ -51,6 +51,18 @@ The system enables store managers to resolve operational decisions using natural
 | 9 | POST `/api/inventory/status` `store_id: STR-102` | Oat Milk CRITICAL alert, Pumpkin Spice Syrup LOW |
 | 10 | POST `/api/ingestion/upload` with new policy doc | Document chunked and added to Pinecone, returns chunks_added count |
 
+### 📸 Live Demo Screenshots
+
+#### Slack Bot in Action
+![Starbucks AI Assistant Slack Bot](docs/screenshots/slack_demo.png)
+
+*Live demo showing complete workflow:*
+- *💬 Refund policy question answered using RAG from policy documents*
+- *📦 Inventory STR-101 — Vanilla Syrup CRITICAL, Whole Milk LOW alerts*
+- *✅ ORD-008 auto-approved under $50 threshold*
+- *⚠️ ORD-010 triggered HITL workflow with Approve/Reject buttons*
+- *✅ Refund HITL-3D770672 approved by manager — audit log updated*
+
 ---
 
 ## Current Version — v1.1.0 (Cloud RAG + Multi-Store)
