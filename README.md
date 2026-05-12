@@ -1,10 +1,21 @@
-# ☕ Starbucks AI Assistant — GenAI Operations POC `v1.2.0`
+# ☕ Starbucks AI Assistant — GenAI Operations POC `v2.0.0`
 
 ## Project Story
 
 This project is a hands-on implementation of the AI platform I architected and delivered at Starbucks as a Senior AI/ML Engineer. Rather than just describing it on a resume, I rebuilt the core concepts as a working POC to demonstrate the end-to-end system design, technical decisions, and business value in a tangible way. Every component — from the agent orchestration layer to the HITL approval workflow — reflects real engineering decisions made under production constraints.
 
 The system enables store managers to resolve operational decisions using natural language — refund approvals, inventory alerts, policy lookups, and compliance checks — all through a conversational interface. A manager can type "Should I refund order ORD-003 for $87?" and receive a structured decision with policy citations, escalation to human approval when warranted, and a full audit trail. Every component maps directly to what was built in production at enterprise scale, with the local stack intentionally mirroring the AWS production architecture so the upgrade path is a configuration change, not a rewrite.
+
+---
+
+## What's New in v2.0.0
+
+- ☁️ AWS Bedrock Claude Sonnet 4.5 as primary LLM (replaces Groq)
+- 🔀 `USE_BEDROCK` flag for instant Groq fallback
+- 🛠️ `bedrock_service.py` — boto3 client, RAG-aware context calls
+- 🤖 `get_llm()` factory routes agent between Bedrock and Groq
+- 📋 Explicit tool-calling rules in system prompt — HITL now fires correctly
+- ✅ Full validation: 8/8 unit tests + 5 end-to-end Bedrock scenarios passing
 
 ---
 
@@ -176,8 +187,8 @@ open frontend/index.html
 - [x] Store manager notifications
 - [x] Multi-store support
 
-### v2.0.0 — AWS Production Stack (Planned)
-- [ ] Migrate LLM from Groq to AWS Bedrock Claude 3 Sonnet
+### v2.0.0 — AWS Bedrock LLM Migration ✅ COMPLETE
+- [x] Migrate LLM from Groq to AWS Bedrock Claude Sonnet 4.5
 - [ ] Migrate embeddings to Amazon Titan Embeddings
 - [ ] Migrate vector store to Amazon OpenSearch
 - [ ] Migrate HITL store to DynamoDB with TTL
