@@ -2,6 +2,8 @@ import operator
 import re
 from typing import Annotated, List
 
+import boto3
+from langchain_aws import ChatBedrock
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_groq import ChatGroq
 from langgraph.graph import END, StateGraph
@@ -35,18 +37,34 @@ class AgentState(TypedDict):
     approval_id: str
 
 
-_llm: ChatGroq | None = None
+_llm = None
 _llm_with_tools = None
+
+
+def get_llm():
+    if config.USE_BEDROCK and config.AWS_ACCESS_KEY_ID:
+        bedrock_client = boto3.client(
+            "bedrock-runtime",
+            aws_access_key_id=config.AWS_ACCESS_KEY_ID,
+            aws_secret_access_key=config.AWS_SECRET_ACCESS_KEY,
+            region_name=config.AWS_REGION,
+        )
+        return ChatBedrock(
+            model_id=config.BEDROCK_MODEL_ID,
+            client=bedrock_client,
+            model_kwargs={"temperature": 0.1},
+        )
+    return ChatGroq(
+        api_key=config.GROQ_API_KEY,
+        model_name=config.GROQ_MODEL,
+        temperature=0.1,
+    )
 
 
 def _get_llm_with_tools():
     global _llm, _llm_with_tools
     if _llm is None:
-        _llm = ChatGroq(
-            api_key=config.GROQ_API_KEY,
-            model_name=config.GROQ_MODEL,
-            temperature=0.1,
-        )
+        _llm = get_llm()
         _llm_with_tools = _llm.bind_tools(_TOOLS)
     return _llm_with_tools
 
