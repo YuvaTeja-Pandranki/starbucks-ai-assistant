@@ -311,7 +311,7 @@
 </div>
 
 <script>
-  const API   = 'http://localhost:8000';
+  const API   = 'https://ahk5tdm3u0.execute-api.us-east-1.amazonaws.com/Prod';
   const chat  = document.getElementById('chatArea');
   const input = document.getElementById('msgInput');
   const typing = document.getElementById('typingRow');
@@ -474,7 +474,7 @@
 
     } catch(err) {
       hideTyping();
-      addMessage('bot', `⚠️ I couldn't reach the server right now. Make sure the API is running on localhost:8000.\n\nError: ${err.message}`);
+      addMessage('bot', `⚠️ I couldn't reach the server right now. Make sure the API is accessible at the configured endpoint.\n\nError: ${err.message}`);
     }
   }
 
