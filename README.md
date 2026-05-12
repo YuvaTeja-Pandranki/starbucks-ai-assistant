@@ -1,10 +1,21 @@
-# ☕ Starbucks AI Assistant — GenAI Operations POC `v1.1.0`
+# ☕ Starbucks AI Assistant — GenAI Operations POC `v1.2.0`
 
 ## Project Story
 
 This project is a hands-on implementation of the AI platform I architected and delivered at Starbucks as a Senior AI/ML Engineer. Rather than just describing it on a resume, I rebuilt the core concepts as a working POC to demonstrate the end-to-end system design, technical decisions, and business value in a tangible way. Every component — from the agent orchestration layer to the HITL approval workflow — reflects real engineering decisions made under production constraints.
 
 The system enables store managers to resolve operational decisions using natural language — refund approvals, inventory alerts, policy lookups, and compliance checks — all through a conversational interface. A manager can type "Should I refund order ORD-003 for $87?" and receive a structured decision with policy citations, escalation to human approval when warranted, and a full audit trail. Every component maps directly to what was built in production at enterprise scale, with the local stack intentionally mirroring the AWS production architecture so the upgrade path is a configuration change, not a rewrite.
+
+---
+
+## What's New in v1.2.0
+
+- 🤖 Live Slack bot connected to real workspace via Socket Mode
+- ✅ HITL approve/reject buttons working inside Slack
+- 📦 Inventory alerts delivered directly in Slack
+- 🔄 Smart message routing to correct API endpoints
+- 🛡️ Bot self-loop prevention
+- 🔁 Rate limit retry logic with exponential backoff
 
 ---
 
@@ -147,11 +158,11 @@ open frontend/index.html
 - [x] Improve RAG retrieval accuracy
 - [x] Add more policy documents (221 vectors, 8 documents across 3 stores)
 
-### v1.2.0 — Live Slack Bot (Coming Soon)
-- [ ] Deploy Slack bot with ngrok tunnel for local testing
-- [ ] Interactive approve/reject buttons in Slack messages
-- [ ] Store manager notifications on HITL escalations
-- [ ] Multi-store support with store-scoped routing
+### v1.2.0 — Live Slack Bot ✅ COMPLETE
+- [x] Deploy Slack bot with Socket Mode
+- [x] Interactive approve/reject buttons in Slack
+- [x] Store manager notifications
+- [x] Multi-store support
 
 ### v2.0.0 — AWS Production Stack (Planned)
 - [ ] Migrate LLM from Groq to AWS Bedrock Claude 3 Sonnet
