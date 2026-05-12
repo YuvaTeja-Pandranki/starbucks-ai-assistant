@@ -1,10 +1,5 @@
 import os
 
-from langchain_community.document_loaders import TextLoader
-from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_community.vectorstores import FAISS
-from langchain_text_splitters import RecursiveCharacterTextSplitter
-
 from backend.config import config
 
 _PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -17,15 +12,25 @@ _SOURCE_FILES = [
 ]
 
 
-def _get_embeddings() -> HuggingFaceEmbeddings:
-    return HuggingFaceEmbeddings(
-        model_name="all-MiniLM-L6-v2",
-        model_kwargs={"device": "cpu"},
-        encode_kwargs={"normalize_embeddings": True},
+def _get_embeddings():
+    from langchain_aws import BedrockEmbeddings
+    import boto3
+    client_kwargs = {"region_name": config.AWS_REGION}
+    if config.AWS_ACCESS_KEY_ID and config.APP_ENV != "production":
+        client_kwargs["aws_access_key_id"] = config.AWS_ACCESS_KEY_ID
+        client_kwargs["aws_secret_access_key"] = config.AWS_SECRET_ACCESS_KEY
+    bedrock_client = boto3.client("bedrock-runtime", **client_kwargs)
+    return BedrockEmbeddings(
+        model_id="amazon.titan-embed-text-v2:0",
+        client=bedrock_client,
     )
 
 
-def build_local_vectorstore() -> FAISS:
+def build_local_vectorstore():
+    from langchain_community.document_loaders import TextLoader
+    from langchain_community.vectorstores import FAISS
+    from langchain_text_splitters import RecursiveCharacterTextSplitter
+
     splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
     all_docs = []
 
@@ -44,7 +49,9 @@ def build_local_vectorstore() -> FAISS:
     return vectorstore
 
 
-def load_vectorstore() -> FAISS:
+def load_vectorstore():
+    from langchain_community.vectorstores import FAISS
+
     index_file = os.path.join(VECTORSTORE_PATH, "index.faiss")
     if os.path.exists(index_file):
         return FAISS.load_local(

@@ -42,13 +42,12 @@ _llm_with_tools = None
 
 
 def get_llm():
-    if config.USE_BEDROCK and config.AWS_ACCESS_KEY_ID:
-        bedrock_client = boto3.client(
-            "bedrock-runtime",
-            aws_access_key_id=config.AWS_ACCESS_KEY_ID,
-            aws_secret_access_key=config.AWS_SECRET_ACCESS_KEY,
-            region_name=config.AWS_REGION,
-        )
+    if config.USE_BEDROCK:
+        client_kwargs = {"region_name": config.AWS_REGION}
+        if config.AWS_ACCESS_KEY_ID and config.APP_ENV != "production":
+            client_kwargs["aws_access_key_id"] = config.AWS_ACCESS_KEY_ID
+            client_kwargs["aws_secret_access_key"] = config.AWS_SECRET_ACCESS_KEY
+        bedrock_client = boto3.client("bedrock-runtime", **client_kwargs)
         return ChatBedrock(
             model_id=config.BEDROCK_MODEL_ID,
             client=bedrock_client,

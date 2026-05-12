@@ -1,0 +1,13 @@
+.env
+.git
+__pycache__
+*.pyc
+.DS_Store
+vectorstore/
+notebooks/
+tests/
+docs/
+node_modules/
+*.md
+slack_bot/
+frontend/

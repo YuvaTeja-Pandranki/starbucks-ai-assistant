@@ -1,10 +1,40 @@
 # ☕ Starbucks AI Assistant — GenAI Operations POC `v2.0.0`
 
+![Version](https://img.shields.io/badge/version-v2.0.0-green)
+![Python](https://img.shields.io/badge/python-3.11-blue)
+![AWS](https://img.shields.io/badge/AWS-Bedrock-orange)
+![LangGraph](https://img.shields.io/badge/LangGraph-agent-purple)
+![Pinecone](https://img.shields.io/badge/Pinecone-4269_vectors-blue)
+![Tests](https://img.shields.io/badge/tests-8_passing-brightgreen)
+
 ## Project Story
 
 This project is a hands-on implementation of the AI platform I architected and delivered at Starbucks as a Senior AI/ML Engineer. Rather than just describing it on a resume, I rebuilt the core concepts as a working POC to demonstrate the end-to-end system design, technical decisions, and business value in a tangible way. Every component — from the agent orchestration layer to the HITL approval workflow — reflects real engineering decisions made under production constraints.
 
 The system enables store managers to resolve operational decisions using natural language — refund approvals, inventory alerts, policy lookups, and compliance checks — all through a conversational interface. A manager can type "Should I refund order ORD-003 for $87?" and receive a structured decision with policy citations, escalation to human approval when warranted, and a full audit trail. Every component maps directly to what was built in production at enterprise scale, with the local stack intentionally mirroring the AWS production architecture so the upgrade path is a configuration change, not a rewrite.
+
+---
+
+## 🚀 Try It Live
+
+### Option 1 — Run Locally (Full Control)
+Follow the Quick Start guide below to run on your machine.
+All you need is a Groq API key (free) or AWS credentials.
+
+### Option 2 — View Live Demo (When Server is Running)
+The demo runs on a local server. To share with others temporarily:
+1. Start the API: `make run`
+2. Start ngrok: `ngrok http 8000`
+3. Share the ngrok URL — anyone can access the Swagger UI and Chat UI
+
+### Option 3 — Scheduled Demo
+Want to see a live walkthrough? Connect on LinkedIn:
+https://www.linkedin.com/in/yuva-teja-p/
+
+### What You Can Demo
+- **Chat UI:** Open `frontend/index.html` with API running
+- **Swagger API:** http://localhost:8000/docs
+- **Slack Bot:** Direct message @Starbucks AI Assistant (requires Slack workspace access)
 
 ---
 
@@ -209,24 +239,52 @@ open frontend/index.html
 - [x] Multi-store support
 
 ### v2.0.0 — AWS Bedrock LLM Migration ✅ COMPLETE
+
+**What Was Built:**
 - [x] Migrate LLM from Groq to AWS Bedrock Claude Sonnet 4.5
+- [x] AWS credentials with cross-region inference profile
+- [x] Groq fallback when USE_BEDROCK=false in .env
+- [x] bedrock_service.py with boto3 direct integration
+- [x] Improved tool calling with explicit agent prompts
+- [x] HITL workflow fully validated on Bedrock
+
+**Planned for v2.1.0+:**
 - [ ] Migrate embeddings to Amazon Titan Embeddings
 - [ ] Migrate vector store to Amazon OpenSearch
 - [ ] Migrate HITL store to DynamoDB with TTL
 - [ ] Deploy API to AWS Lambda + API Gateway via Mangum
-- [ ] Add CloudWatch monitoring and alerting dashboards
-- [ ] Add LangSmith LLM observability and tracing
-- [ ] Implement AWS Secrets Manager for credential rotation
-- [ ] Add SageMaker for model evaluation pipelines
+- [ ] Add CloudWatch monitoring and alerting
+- [ ] Add LangSmith LLM observability
+- [ ] AWS Secrets Manager for credentials
+- [ ] SageMaker for model evaluation
 
-### v2.1.0 — Enterprise Features (Planned)
+### v2.1.0 — AWS Full Stack Deployment (Next)
+- [ ] Deploy FastAPI to AWS Lambda using Mangum
+- [ ] API Gateway REST API with custom domain
+- [ ] DynamoDB for HITL approval persistence
+- [ ] Amazon Titan Embeddings replacing HuggingFace
+- [ ] Amazon OpenSearch replacing Pinecone
+- [ ] CloudWatch dashboards and alerting
+- [ ] LangSmith LLM tracing and evaluation
+- [ ] AWS Secrets Manager for all credentials
+
+### v2.2.0 — Enterprise Features (Planned)
 - [ ] Multi-store data isolation with RBAC
-- [ ] Real POS system integration (Oracle MICROS)
-- [ ] Real-time Kafka event streaming for inventory updates
-- [ ] GraphRAG with Neo4j for store relationship modeling
-- [ ] Fine-tuned embeddings on Starbucks domain data
-- [ ] A/B testing framework for LLM response quality
-- [ ] Ragas evaluation dashboard for RAG quality metrics
+- [ ] Real POS system integration
+- [ ] Real-time Kafka event streaming
+- [ ] GraphRAG with Neo4j
+- [ ] Fine-tuned embeddings on domain data
+- [ ] A/B testing framework for LLM responses
+- [ ] Ragas evaluation dashboard
+
+### Vision
+
+This project demonstrates a complete GenAI engineering journey — from a zero-cost
+local POC to a production AWS deployment. Each version adds a real engineering
+challenge: cloud vector stores, live bot integrations, LLM provider migrations,
+and eventually full serverless deployment. The goal is to show not just that AI
+can be built, but that it can be built reliably, governed properly, and deployed
+at enterprise scale.
 
 ---
 

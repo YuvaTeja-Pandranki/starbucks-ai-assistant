@@ -1,0 +1,14 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      python: 3.11
+    commands:
+      - pip install aws-sam-cli
+  build:
+    commands:
+      - sam build
+      - sam package --s3-bucket $S3_BUCKET --output-template-file packaged.yaml
+  post_build:
+    commands:
+      - sam deploy --template-file packaged.yaml --stack-name starbucks-ai-assistant --capabilities CAPABILITY_IAM

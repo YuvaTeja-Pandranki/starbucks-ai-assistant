@@ -1,8 +1,5 @@
 import time
 
-from langchain_community.document_loaders import TextLoader
-from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_text_splitters import RecursiveCharacterTextSplitter
 from pinecone import Pinecone, ServerlessSpec
 
 from backend.config import config
@@ -14,11 +11,17 @@ _SOURCE_FILES = [
 ]
 
 
-def _get_embeddings() -> HuggingFaceEmbeddings:
-    return HuggingFaceEmbeddings(
-        model_name="all-MiniLM-L6-v2",
-        model_kwargs={"device": "cpu"},
-        encode_kwargs={"normalize_embeddings": True},
+def _get_embeddings():
+    from langchain_aws import BedrockEmbeddings
+    import boto3
+    client_kwargs = {"region_name": config.AWS_REGION}
+    if config.AWS_ACCESS_KEY_ID and config.APP_ENV != "production":
+        client_kwargs["aws_access_key_id"] = config.AWS_ACCESS_KEY_ID
+        client_kwargs["aws_secret_access_key"] = config.AWS_SECRET_ACCESS_KEY
+    bedrock_client = boto3.client("bedrock-runtime", **client_kwargs)
+    return BedrockEmbeddings(
+        model_id="amazon.titan-embed-text-v2:0",
+        client=bedrock_client,
     )
 
 
@@ -55,6 +58,10 @@ def create_index_if_not_exists() -> str:
 
 
 def build_pinecone_vectorstore(index_name: str | None = None):
+    import os
+    from langchain_community.document_loaders import TextLoader
+    from langchain_text_splitters import RecursiveCharacterTextSplitter
+
     index_name = index_name or create_index_if_not_exists()
     embeddings = _get_embeddings()
     pc = get_pinecone_client()
@@ -64,7 +71,6 @@ def build_pinecone_vectorstore(index_name: str | None = None):
     all_docs = []
 
     for filename in _SOURCE_FILES:
-        import os
         filepath = os.path.join(config.DATA_DIR, filename)
         loader = TextLoader(filepath, encoding="utf-8")
         docs = loader.load()

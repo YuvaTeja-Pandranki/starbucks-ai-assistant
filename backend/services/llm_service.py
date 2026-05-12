@@ -13,7 +13,7 @@ def call_llm(
     temperature: float = 0.2,
     max_tokens: int = 800,
 ) -> str:
-    if config.USE_BEDROCK and config.AWS_ACCESS_KEY_ID:
+    if config.USE_BEDROCK:
         from backend.services.bedrock_service import call_bedrock
         return call_bedrock(system_prompt, user_message, conversation_history, temperature, max_tokens)
 
@@ -55,7 +55,7 @@ def call_llm_with_context(
     retrieved_context: str,
     temperature: float = 0.1,
 ) -> str:
-    if config.USE_BEDROCK and config.AWS_ACCESS_KEY_ID:
+    if config.USE_BEDROCK:
         from backend.services.bedrock_service import call_bedrock_with_context
         return call_bedrock_with_context(system_prompt, user_message, retrieved_context, temperature)
 

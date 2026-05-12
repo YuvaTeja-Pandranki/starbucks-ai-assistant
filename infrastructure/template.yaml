@@ -1,0 +1,51 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Starbucks AI Assistant - Lambda Deployment
+
+Globals:
+  Function:
+    Timeout: 300
+    MemorySize: 3008
+    Environment:
+      Variables:
+        APP_ENV: production
+        USE_BEDROCK: "true"
+        BEDROCK_MODEL_ID: us.anthropic.claude-sonnet-4-5-20250929-v1:0
+        AWS_REGION_NAME: us-east-1
+        PINECONE_INDEX_NAME: starbucks-knowledge
+        HITL_THRESHOLD_AMOUNT: "50.0"
+        SECRET_NAME: starbucks-ai-assistant/prod
+
+Resources:
+  StarbucksAIFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: starbucks-ai-assistant
+      CodeUri: ..
+      Handler: lambda_handler.handler
+      Runtime: python3.11
+      Architectures:
+        - x86_64
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: ANY
+        Root:
+          Type: Api
+          Properties:
+            Path: /
+            Method: ANY
+      Policies:
+        - AmazonBedrockFullAccess
+        - AmazonDynamoDBFullAccess
+        - AmazonSSMReadOnlyAccess
+        - SecretsManagerReadWrite
+    Metadata:
+      BuildMethod: makefile
+
+Outputs:
+  ApiURL:
+    Description: API Gateway endpoint URL
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"

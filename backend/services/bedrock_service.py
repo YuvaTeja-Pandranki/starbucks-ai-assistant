@@ -7,12 +7,11 @@ from backend.config import config
 
 
 def get_bedrock_client():
-    return boto3.client(
-        "bedrock-runtime",
-        aws_access_key_id=config.AWS_ACCESS_KEY_ID,
-        aws_secret_access_key=config.AWS_SECRET_ACCESS_KEY,
-        region_name=config.AWS_REGION,
-    )
+    kwargs = {"region_name": config.AWS_REGION}
+    if config.AWS_ACCESS_KEY_ID and config.APP_ENV != "production":
+        kwargs["aws_access_key_id"] = config.AWS_ACCESS_KEY_ID
+        kwargs["aws_secret_access_key"] = config.AWS_SECRET_ACCESS_KEY
+    return boto3.client("bedrock-runtime", **kwargs)
 
 
 def call_bedrock(

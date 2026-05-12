@@ -3,9 +3,10 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+import boto3
 import PyPDF2
+from langchain_aws import BedrockEmbeddings
 from langchain_core.documents import Document
-from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 from backend.config import config
@@ -61,12 +62,17 @@ def ingest_public_docs():
         print()
 
     print(f"Total chunks to upload: {len(all_docs)}")
-    print("Generating embeddings...")
+    print("Generating embeddings with Bedrock Titan...")
 
-    embeddings = HuggingFaceEmbeddings(
-        model_name="all-MiniLM-L6-v2",
-        model_kwargs={"device": "cpu"},
-        encode_kwargs={"normalize_embeddings": True},
+    bedrock_client = boto3.client(
+        "bedrock-runtime",
+        aws_access_key_id=config.AWS_ACCESS_KEY_ID,
+        aws_secret_access_key=config.AWS_SECRET_ACCESS_KEY,
+        region_name=config.AWS_REGION,
+    )
+    embeddings = BedrockEmbeddings(
+        model_id="amazon.titan-embed-text-v2:0",
+        client=bedrock_client,
     )
 
     texts = [doc.page_content for doc in all_docs]

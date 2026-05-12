@@ -1,0 +1,15 @@
+# Minimal Lambda requirements — pure Python only, no native wheels needed.
+# Embeddings handled by Amazon Titan (Bedrock) in production.
+fastapi
+mangum
+python-dotenv
+httpx
+boto3
+langchain-core
+langchain-aws
+langgraph
+pinecone
+langchain-groq
+groq
+langchain-community
+langchain-text-splitters

@@ -17,7 +17,7 @@ class Config:
 
     PINECONE_API_KEY: str = os.getenv("PINECONE_API_KEY", "")
     PINECONE_INDEX_NAME: str = os.getenv("PINECONE_INDEX_NAME", "starbucks-knowledge")
-    PINECONE_DIMENSION: int = 384
+    PINECONE_DIMENSION: int = 1024
     PINECONE_METRIC: str = "cosine"
     PINECONE_CLOUD: str = os.getenv("PINECONE_CLOUD", "aws")
     PINECONE_REGION: str = os.getenv("PINECONE_REGION", "us-east-1")
@@ -44,3 +44,23 @@ class Config:
 
 
 config = Config()
+
+
+def load_from_secrets_manager(cfg: "Config") -> None:
+    if cfg.APP_ENV != "production":
+        return
+    try:
+        import json
+        import boto3
+        client = boto3.client("secretsmanager", region_name=cfg.AWS_REGION)
+        secret = client.get_secret_value(SecretId="starbucks-ai-assistant/prod")
+        secrets = json.loads(secret["SecretString"])
+        for key, value in secrets.items():
+            if value:
+                setattr(cfg, key, value)
+        print("Loaded secrets from AWS Secrets Manager")
+    except Exception as e:
+        print(f"Could not load from Secrets Manager: {e}")
+
+
+load_from_secrets_manager(config)

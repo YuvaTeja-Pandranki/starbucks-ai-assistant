@@ -1,5 +1,11 @@
+import logging
+import os
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+
+if os.getenv("APP_ENV") == "production":
+    logging.getLogger().setLevel(logging.INFO)
 
 from backend.agents.orchestrator import run_agent
 from backend.models.schemas import (
