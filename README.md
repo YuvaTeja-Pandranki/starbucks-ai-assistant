@@ -18,28 +18,54 @@ The system enables store managers to resolve operational decisions using natural
 
 ## 🚀 Live Demo
 
-**API is deployed and publicly accessible on AWS Lambda:**
+### 🌐 Live API (Publicly Accessible)
+The API is deployed on AWS Lambda and accessible to anyone:
 
-```
-Live API URL: https://ahk5tdm3u0.execute-api.us-east-1.amazonaws.com/Prod/
-```
+**Swagger UI:** https://ahk5tdm3u0.execute-api.us-east-1.amazonaws.com/Prod/docs
 
-Test it right now:
-
+**Health Check:**
 ```bash
-# Health check
 curl https://ahk5tdm3u0.execute-api.us-east-1.amazonaws.com/Prod/health
+```
 
-# Ask the AI assistant
+**Test Agent:**
+```bash
 curl -X POST https://ahk5tdm3u0.execute-api.us-east-1.amazonaws.com/Prod/api/agent/chat \
   -H "Content-Type: application/json" \
-  -d '{"message": "What is the refund policy?", "session_id": "demo", "user_id": "viewer", "store_id": "STR-101"}'
+  -d '{"message": "What is the refund policy?", "user_id": "test", "store_id": "STR-101", "session_id": "demo"}'
 ```
 
-### Other Ways to Demo
-- **Run Locally:** Follow the Quick Start guide below (requires Groq API key or AWS credentials)
-- **Slack Bot:** Direct message @Starbucks AI Assistant (requires Slack workspace access)
-- **Scheduled Walkthrough:** Connect on LinkedIn: https://www.linkedin.com/in/yuva-teja-p/
+---
+
+### 💬 Chat UI
+Open `frontend/index.html` in your browser — connects directly to AWS Lambda.
+No local server needed.
+
+![Starbucks AI Assistant Chat UI](docs/screenshots/chatui_demo.png)
+
+![Starbucks AI Assistant Chat UI Demo 2](docs/screenshots/chatui_demo2.png)
+
+---
+
+### 🤖 Slack Bot
+The Slack bot runs in a private workspace. See the demo screenshot below.
+
+![Starbucks AI Assistant Slack Bot](docs/screenshots/slack_demo.png)
+
+*Live demo showing: refund policy RAG answer, inventory alerts, HITL approval with Approve/Reject buttons*
+
+---
+
+### 📋 Demo Scenarios
+
+| Scenario | How to Test | Expected Result |
+|---|---|---|
+| Health check | `GET /health` | `{"status": "ok"}` |
+| Policy question | POST /api/agent/chat — "What is the refund policy for quality issues?" | Grounded RAG answer from policy docs |
+| Auto-approved refund | POST /api/agent/chat — "Can I approve a refund for order ORD-008?" | Auto-approved under $50 threshold |
+| HITL escalation | POST /api/agent/chat — "Process refund for order ORD-003" | Escalated — $87.00 exceeds $50 threshold |
+| Inventory alert | POST /api/agent/chat — "Show inventory for STR-101" | Low-stock alerts with reorder recommendations |
+| Food safety RAG | POST /api/agent/chat — "What are food safety rules for food handlers?" | Answer grounded in FDA Food Code |
 
 ---
 
@@ -90,12 +116,6 @@ curl -X POST https://ahk5tdm3u0.execute-api.us-east-1.amazonaws.com/Prod/api/age
 - ✅ All 8 unit tests still passing
 
 ---
-
-## Live Demo
-
-- **Chat UI:** Open `frontend/index.html` in your browser (with API running on port 8000)
-- **API Docs:** http://localhost:8000/docs
-- **Health Check:** http://localhost:8000/health
 
 ### Demo Scenarios
 
